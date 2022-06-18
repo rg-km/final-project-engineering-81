@@ -2,6 +2,7 @@ import '../styles/Login.css'
 import { Button, Input, Image } from "@chakra-ui/react";
 import logo from '../assets/logo-dark.png'
 import BookList from './BookList';
+import { Link } from 'react-router-dom';
 
 export default function Login(){
     return(
@@ -19,7 +20,9 @@ export default function Login(){
                 </div>
 
                 <div className='btnLogin'>
-                    <Button colorScheme={'#112B3C'}>Login</Button>
+                    <Link to={'daftarBuku'}>
+                        <Button colorScheme={'#112B3C'}>Login</Button>
+                    </Link>
                 </div>
             </div>
 
