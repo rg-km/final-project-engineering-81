@@ -7,12 +7,11 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 
 
-const FeatureContent = ({ title, desc, ...rest }) => {
+const FeatureContent = ({ content, ...rest }) => {
     return (
       <Box p={8} shadow='md' borderWidth='1px' {...rest}>
-        <Heading fontSize='xl' color='#1DC9A1' mb={6}>{title}</Heading>
-        {title === 'Akun Saya' ? contentAkunUser() : null}
-        {title === 'Pesanan Saya' ? contentPesananUser() : null}
+        {content === 'Akun Saya' ? contentAkunUser() : null}
+        {content === 'Pesanan Saya' ? contentPesananUser() : null}
       </Box>
     )
 }
@@ -27,8 +26,8 @@ const AccountUser = () => {
             <Navbar />
 
             <Container maxW='container.xl' mt={100}>
-            <Stack spacing={8} direction='row'>
-                <Box w='20%' p={8} shadow='md' borderWidth='1px'>
+            <Stack spacing={8} direction='row' >
+                <Box w='20%' h='300' p={8} shadow='md' borderWidth='1px'>
                     <Box 
                     as='button'
                     mb={3}
@@ -70,7 +69,6 @@ const AccountUser = () => {
                 </Box>
 
                 <FeatureContent w='80%'
-                    title= {contentActive}
                     content= {contentActive}
                 />
 
