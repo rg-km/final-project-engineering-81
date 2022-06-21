@@ -18,7 +18,9 @@ export default function Navbar(){
                 <Link to={'/keranjang'}>
                     <i className="bi bi-cart3"></i>
                 </Link>
-                <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif'/>
+                <Link to={'/account'}>
+                    <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif' alt='user'/>
+                </Link>
             </div>
         </div>
     )
