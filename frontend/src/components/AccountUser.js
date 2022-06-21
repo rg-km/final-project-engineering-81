@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { Heading, Box, Stack, SimpleGrid, Container } from '@chakra-ui/react'
+import { Box, Stack, SimpleGrid, Container } from '@chakra-ui/react'
 
 import contentAkunUser from '../subComponents/contentAkunUser'
 import contentPesananUser from '../subComponents/contentPesananUser'
 import contentDataDiriUser from '../subComponents/contentDataDiriUser'
-import Navbar from './Navbar'
-import Footer from './Footer'
 
 
 const FeatureContent = ({ content, ...rest }) => {
@@ -24,12 +22,9 @@ const AccountUser = () => {
 
     return (
         <SimpleGrid column={1}>
-            {/* import navbar */}
-            <Navbar />
-
             <Container maxW='container.xl' mt={100}>
             <Stack spacing={8} direction='row' >
-                <Box w='20%' h='300' p={8} shadow='md' borderWidth='1px'>
+                <Box w='20%' h='300' p={8} shadow='md' borderWidth='1px' textAlign='left'>
                     <Box 
                     as='button'
                     mb={3}
@@ -93,8 +88,6 @@ const AccountUser = () => {
 
                 </Stack>
             </Container>
-
-            <Footer />
 
         </SimpleGrid>
     )
