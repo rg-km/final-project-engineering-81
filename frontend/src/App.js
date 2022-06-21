@@ -6,6 +6,7 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import BookDetail from './components/BookDetail';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
+import AccountUser from './components/AccountUser';
 // import Checkout from './components/Checkout';
 
 function App() {
@@ -38,6 +39,8 @@ function App() {
 
         {/* CHECKOUT */}
         {/* <Route path='checkout' element={ <Checkout/> }/> */}
+
+        < Route exact path="/account" element={<AccountUser />} />
 
       </Routes>
 
