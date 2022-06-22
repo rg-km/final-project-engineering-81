@@ -179,3 +179,112 @@
     width: 100%;
     margin: 10px 0px 10px 0px;
 }
+
+.modal{
+    display: flex;
+    width: 450px;
+    flex-direction: column;
+    font-family: 'Inter';
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+    align-items: center;
+    /* background-color: blue; */
+}
+
+.modal-header{
+    background-color: rgba(29, 201, 161, 0.5);
+    text-align: center;
+    width: 100%;
+}
+
+.modal h1{
+    font-size: 22px;
+    font-weight: 900;
+}
+
+.modal h2{
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.modal h3{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.modal .modal-body{
+    display: flex;
+    /* justify-content: center; */
+    flex-direction: column;
+    text-align: center;
+}
+
+.modal .transfer{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    width: 419px;
+    height: fit-content;
+    padding: 15px 22px 15px 22px;
+    text-align: left;
+
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+}
+
+.bank-addres{
+    display: flex;
+    align-items: center;
+}
+
+.bank-addres img{
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.transfer input{
+    background-color: #E6E9EC;
+    width: 100%;
+    font-size: 18px;
+    font-weight: 900;
+    color: black;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    padding: 8px;
+}
+
+.bukti{
+    display: flex;
+    flex-direction: column;
+    width: 419px;
+    height: fit-content;
+    padding: 15px 22px 15px 22px;
+    text-align: left;
+
+    background: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.bukti input{
+    width: 200px;
+    height: 200px;
+}
+
+.bukti .input-img{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    border: none;
+}
+
+.bukti button{
+    background-color: #1DC9A1;
+    border-radius: 10px;
+    font-size: 22px;
+    color: white;
+    margin-top: 10px;
+}
