@@ -84,7 +84,9 @@ export default function BookDetail(){
                             <Link to={'/keranjang'}>
                                 <Button className='keranjang'>Keranjang</Button>
                             </Link>
-                            <Button className='beli'>Beli Sekarang</Button>
+                            <Link to={'/checkout'}>
+                                <Button className='beli'>Beli Sekarang</Button>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -7,7 +7,7 @@ import BookDetail from './components/BookDetail';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
 import AccountUser from './components/AccountUser';
-// import Checkout from './components/Checkout';
+import Checkout from './components/Checkout';
 
 function App() {
   const loc = useLocation()
@@ -38,7 +38,7 @@ function App() {
         <Route path='keranjang' element={ <Cart/> }/>
 
         {/* CHECKOUT */}
-        {/* <Route path='checkout' element={ <Checkout/> }/> */}
+        <Route path='checkout' element={ <Checkout/> }/>
 
         < Route exact path="/account" element={<AccountUser />} />
 
