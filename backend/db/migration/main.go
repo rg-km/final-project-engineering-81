@@ -21,6 +21,22 @@ func main() {
 	role varchar(255) NOT NULL,
 	loggedin boolean NOT NULL
 	);
+
+	CREATE TABLE IF NOT EXISTS books (
+		id integer NOT NULL primary key AUTOINCREMENT,
+		judul varchar(255) NOT NULL,
+		penerbit varchar(255) NOT NULL,
+		tahun_terbit varchar(255) NOT NULL,
+		jumlah_halaman varchar(255) NOT NULL,
+		isbn varchar(255) NOT NULL,
+		kategori varchar(255) NOT NULL,
+		bahasa varchar(255) NOT NULL,
+		berat integer NOT NULL,
+		harga integer NOT NULL,
+		kondisi varchar(255) NOT NULL,
+		deskripsi varchar(255) NOT NULL,
+		stok integer NOT NULL
+	);
 	
 	`)
 
