@@ -2,6 +2,7 @@ import '../styles/Login.css'
 import { Button, Input, Image } from "@chakra-ui/react";
 import logo from '../assets/logo-dark.png'
 import { Link } from 'react-router-dom';
+import RegisterModal from './RegisterModal';
 
 export default function Login(){
     return(
@@ -22,6 +23,9 @@ export default function Login(){
                     <Link to={'daftar-buku'}>
                         <Button colorScheme={'#112B3C'}>Login</Button>
                     </Link>
+                </div>
+                <div className='btnLogin'>
+                    <RegisterModal />
                 </div>
             </div>
 
