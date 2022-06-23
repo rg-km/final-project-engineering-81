@@ -1,17 +1,16 @@
 package repository
 
 import (
+	"database/sql"
 	"strconv"
-
-	"github.com/rg-km/final-project-engineering-81/backend/db"
 )
 
 type BookRepository struct {
-	db db.DB
+	db *sql.DB
 }
 
-func NewBookRepository(db db.DB) BookRepository {
-	return BookRepository{db}
+func NewBookRepository(db *sql.DB) *BookRepository {
+	return &BookRepository{db: db}
 }
 
 func (u *BookRepository) LoadOrCreate() ([]Book, error) {
@@ -42,6 +41,42 @@ func (u *BookRepository) LoadOrCreate() ([]Book, error) {
 
 	return result, nil
 
+}
+
+func (u *BookRepository) FetchBooks() ([]Book, error) {
+	books, stmt := []Book{}, `SELECT id, judul, penerbit, tahun_terbit, jumlah_halaman, isbn, kategori, bahasa, berat, harga, kondisi, deskripsi, stok`
+
+	rows, err := u.db.Query(stmt)
+	if err != nil {
+		return nil, err
+	}
+
+	defer rows.Close()
+	for rows.Next() {
+		var book Book
+		err = rows.Scan(
+			&book.ID,
+			&book.Judul,
+			&book.Penerbit,
+			&book.TahunTerbit,
+			&book.JumlahHalaman,
+			&book.ISBN,
+			&book.Kategori,
+			&book.Bahasa,
+			&book.Berat,
+			&book.Harga,
+			&book.Kondisi,
+			&book.Deskripsi,
+			&book.Stok,
+		)
+
+		if err != nil {
+			return nil, err
+		}
+
+		books = append(books, book)
+	}
+	return books, nil
 }
 
 func (u *BookRepository) SelectAll() ([]Book, error) {
