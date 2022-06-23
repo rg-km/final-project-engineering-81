@@ -12,12 +12,12 @@ export default function BookList(){
     const pathName = loc.pathname
     const splitPath = pathName.split('/')
     
-    let link = '/daftar-buku/detail';
+    let link = '/user/buku/detail';
     let user = '';
 
     if(splitPath[1] == 'admin'){
         user = 'admin'
-        link = '/admin/daftar-buku/detail'
+        link = '/admin/buku/detail'
     };
 
     const [productActive, setProductActive] = useState('all')
@@ -56,7 +56,9 @@ export default function BookList(){
                         </Button>
 
                         <div className='btn-green'>
-                            <Button>Tambah Produk</Button>
+                            <Link to={'/admin/buku/tambah'}>
+                                <Button>Tambah Produk</Button>
+                            </Link>
                         </div>
                     </div>
                     <hr/>

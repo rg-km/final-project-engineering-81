@@ -1,13 +1,25 @@
 import '../styles/Navbar.css'
 import logo from '../assets/logo-light.png'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 
 
 
 export default function Navbar(){
+    const loc = useLocation()
+    const pathName = loc.pathname
+    const splitPath = pathName.split('/')
+    
+    let link = '/user/buku';
+    let user = '';
+
+    if(splitPath[1] == 'admin'){
+        user = 'admin'
+        link = '/admin/buku'
+    };
+
     return(
         <div className="navbar-container">
-            <Link to={'/admin/daftar-buku'}>
+            <Link to={link}>
                 <div className='title'>
                     <img src={logo}/>
                     <p>BukuKita</p>
