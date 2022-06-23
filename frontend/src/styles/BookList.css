@@ -42,6 +42,14 @@
     margin-left: 50px;
 }
 
+.btn-green button:hover{
+    background-color: #25b493;
+    border-radius: 15px;
+    font-size: 22px;
+    padding: 0px 25px 0px 25px;
+    margin-left: 50px;
+}
+
 .container-bookList hr{
     border: 1px solid #98929288;
     margin: 0px 60px 20px 60px;

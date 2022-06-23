@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Cart from './components/Cart';
 import AccountUser from './components/AccountUser';
 import Checkout from './components/Checkout';
+import AddBook from './components/AddBook';
 
 function App() {
   const loc = useLocation()
@@ -29,10 +30,12 @@ function App() {
         <Route path='/' element={ <Login/> }/>
 
         {/* daftar buku */}
-        <Route path='daftar-buku'>
-          <Route index element={ <BookList/> } />
+        <Route path='user'>
+          <Route path='buku'>
+            <Route index element={ <BookList/> } />
 
-          <Route path='detail' element={ <BookDetail/> } />
+            <Route path='detail' element={ <BookDetail/> } />
+          </Route>
         </Route>
 
         {/* Keranjang */}
@@ -47,10 +50,12 @@ function App() {
         {/* ADMIN */}
         <Route path='admin'>
           {/* DAFTAR BUKU */}
-          <Route path='daftar-buku'>
+          <Route path='buku'>
             <Route index element={ <BookList/> } />
 
             <Route path='detail' element={ <BookDetail/> } />
+
+            <Route path='tambah' element={ <AddBook/> }/>
           </Route>
         </Route>
         {/* END ADMIN */}
