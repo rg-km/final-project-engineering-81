@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
 
 export default function Login(){
+    const roleUser = 'admin'
+
     return(
         <div className="container">
             <div className='left'>
@@ -20,7 +22,7 @@ export default function Login(){
                 </div>
 
                 <div className='btnLogin'>
-                    <Link to={'daftar-buku'}>
+                    <Link to={roleUser == 'admin' ? '/admin/daftar-buku' : '/daftar-buku'}>
                         <Button colorScheme={'#112B3C'}>Login</Button>
                     </Link>
                 </div>

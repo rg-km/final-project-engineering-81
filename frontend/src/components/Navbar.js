@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 export default function Navbar(){
     return(
         <div className="navbar-container">
-            <Link to={'/daftar-buku'}>
+            <Link to={'/admin/daftar-buku'}>
                 <div className='title'>
                     <img src={logo}/>
                     <p>BukuKita</p>

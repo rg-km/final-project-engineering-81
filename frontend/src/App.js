@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import BookList from './components/BookList';
 import Login from './components/Login';
@@ -41,6 +42,18 @@ function App() {
         <Route path='checkout' element={ <Checkout/> }/>
 
         < Route exact path="/account" element={<AccountUser />} />
+
+
+        {/* ADMIN */}
+        <Route path='admin'>
+          {/* DAFTAR BUKU */}
+          <Route path='daftar-buku'>
+            <Route index element={ <BookList/> } />
+
+            <Route path='detail' element={ <BookDetail/> } />
+          </Route>
+        </Route>
+        {/* END ADMIN */}
 
       </Routes>
 
