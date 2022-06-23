@@ -1,11 +1,56 @@
 .container-bookList{
     display: flex;
-    /* justify-content: normal; */
-    flex-wrap: wrap;
+    flex-direction: column;
     font-family: 'Inter';
-    font-weight: 700;
-    margin-left: 8%;
     margin-top: 60px;
+}
+
+.container-bookList h1{
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.container-bookList h2{
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.container-bookList h3{
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(152, 146, 146, 1);
+}
+
+.nav-buku-admin{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 60px 15px 60px;
+    flex-wrap: wrap;
+}
+
+.nav-buku-admin button, .nav-buku-admin button:hover{
+    background-color: transparent;
+    font-size: 20px;
+}
+
+.btn-green button{
+    background-color: #1DC9A1;
+    color: white;
+    border-radius: 15px;
+    font-size: 22px;
+    padding: 0px 25px 0px 25px;
+    margin-left: 50px;
+}
+
+.container-bookList hr{
+    border: 1px solid #98929288;
+    margin: 0px 60px 20px 60px;
+}
+
+.book-items{
+    display: flex;
+    margin-left: 5%;
+    flex-wrap: wrap;
 }
 
 .card{
@@ -30,19 +75,11 @@
     margin-top: 5px;
 }
 
-.card .writer{
-    color: rgba(152, 146, 146, 1);
-    font-size: 14px;
-    margin-bottom: 3px;
+.detail .writer-show{
+    display: flex;
+    justify-content: space-between;
 }
 
-.card .price{
+.green{
     color: #1DC9A1;
-    font-size: 18px;
-    margin-bottom: 3px;
-}
-
-.card .title{
-    font-size: 18px;
-    margin-bottom: 3px;
 }
