@@ -47,7 +47,7 @@ function App() {
         {/* ADMIN */}
         <Route path='admin'>
           {/* DAFTAR BUKU */}
-          <Route path='daftar-buku'>
+          <Route path='buku'>
             <Route index element={ <BookList/> } />
 
             <Route path='detail' element={ <BookDetail/> } />
