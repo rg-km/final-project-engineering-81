@@ -22,7 +22,7 @@ export default function Login(){
                 </div>
 
                 <div className='btnLogin'>
-                    <Link to={roleUser == 'admin' ? '/admin/daftar-buku' : '/daftar-buku'}>
+                    <Link to={roleUser == 'admin' ? '/admin/buku' : '/user/buku'}>
                         <Button colorScheme={'#112B3C'}>Login</Button>
                     </Link>
                 </div>
