@@ -4,7 +4,7 @@ import { Box, Stack, SimpleGrid, Container } from '@chakra-ui/react'
 import contentAkunUser from '../subComponents/contentAkunUser'
 import contentPesananUser from '../subComponents/contentPesananUser'
 import contentDataDiriUser from '../subComponents/contentDataDiriUser'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const FeatureContent = ({ content, ...rest }) => {
@@ -19,7 +19,7 @@ const FeatureContent = ({ content, ...rest }) => {
 
 
 const AccountUser = () => {
-    const [contentActive, setcontentActive] = useState('Akun Saya')
+    const [contentActive, setcontentActive] = useState('Pesanan Saya')
 
     return (
         <SimpleGrid column={1}>

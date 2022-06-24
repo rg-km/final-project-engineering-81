@@ -21,7 +21,7 @@ export default function Navbar(){
         <div className="navbar-container">
             <Link to={link}>
                 <div className='title'>
-                    <img src={logo}/>
+                    <img src={logo} alt="logo"/>
                     <p>BukuKita</p>
                 </div>
             </Link>
