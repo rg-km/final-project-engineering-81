@@ -33,18 +33,21 @@ function App() {
         <Route path='user'>
           <Route path='buku'>
             <Route index element={ <BookList/> } />
-
             <Route path='detail' element={ <BookDetail/> } />
           </Route>
+          
+          {/* Keranjang */}
+          <Route path='keranjang' element={ <Cart/> }/>
+          <Route path="akun" element={<AccountUser />} />
+          {/* CHECKOUT */}
+          <Route path='checkout' element={ <Checkout/> }/>
         </Route>
 
-        {/* Keranjang */}
-        <Route path='keranjang' element={ <Cart/> }/>
+        
 
-        {/* CHECKOUT */}
-        <Route path='checkout' element={ <Checkout/> }/>
+        
 
-        < Route exact path="/account" element={<AccountUser />} />
+        
 
 
         {/* ADMIN */}

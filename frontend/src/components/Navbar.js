@@ -12,7 +12,7 @@ export default function Navbar(){
     let link = '/user/buku';
     let user = '';
 
-    if(splitPath[1] == 'admin'){
+    if(splitPath[1] === 'admin'){
         user = 'admin'
         link = '/admin/buku'
     };
@@ -27,7 +27,7 @@ export default function Navbar(){
             </Link>
 
             <div className='tools'>
-                {user == 'admin' 
+                {user === 'admin' 
                     ?
                     <>
                         <Link to={'/admin/pesanan'}>
@@ -40,7 +40,7 @@ export default function Navbar(){
                             <i className="bi bi-cart3"></i>
                         </Link>
                         
-                        <Link to={'/user/account'}>
+                        <Link to={'/user/akun'}>
                             <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif' alt='user'/>
                         </Link>
                     </>
