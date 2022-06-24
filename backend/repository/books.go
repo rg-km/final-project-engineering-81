@@ -12,6 +12,21 @@ func NewBookRepository(db *sql.DB) *BookRepository {
 	return &BookRepository{db: db}
 }
 
+func (u *BookRepository) CreateBook(Book, error) (int64, error) {
+
+	var sqlStatement string
+
+	sqlStatement = "insert into books (judul, penerbit, tahun_terbit, jumlah_halaman, isbn, kategori, bahasa, berat, harga, kondisi, deskripsi, stok values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+
+	books, err := u.db.Query(sqlStatement)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return books, nil
+}
+
 func (u *BookRepository) FetchBookByID(id int64) (Book, error) {
 
 	var book Book
