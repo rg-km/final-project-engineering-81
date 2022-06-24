@@ -22,25 +22,20 @@ func main() {
 	loggedin boolean NOT NULL
 	);
 
-	CREATE TABLE IF NOT EXISTS product (
+	CREATE TABLE IF NOT EXISTS books (
 		id integer NOT NULL primary key AUTOINCREMENT,
-		title string NOT NULL,
-		writer_name string NOT NULL,
-		price integer NOT NULL,
-		stock integer NOT NULL,
-		sold integer NOT NULL,
-		description longtext NOT NULL,
-		condition string NOT NULL,
-		weight string NOT NULL,
-		number_of_pages NOT NULL,
-		isbn string NOT NULL,
-		publication_year int NOT NULL,
-		publisher string NOT NULL,
-		language string NOT NULL,
-		category_name string NOT NULL,
-		donation_date datetime NOT NULL,
-		created_at datetime NOT NULL,
-		updated_at datetime NOT NULL,
+		judul varchar(255) NOT NULL,
+		penerbit varchar(255) NOT NULL,
+		tahun_terbit varchar(255) NOT NULL,
+		jumlah_halaman varchar(255) NOT NULL,
+		isbn varchar(255) NOT NULL,
+		kategori varchar(255) NOT NULL,
+		bahasa varchar(255) NOT NULL,
+		berat integer NOT NULL,
+		harga integer NOT NULL,
+		kondisi varchar(255) NOT NULL,
+		deskripsi varchar(255) NOT NULL,
+		stok integer NOT NULL
 	);
 	
 	`)
