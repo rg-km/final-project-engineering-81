@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import BookList from './components/BookList';
 import Login from './components/Login';
@@ -7,7 +8,8 @@ import BookDetail from './components/BookDetail';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
 import AccountUser from './components/AccountUser';
-// import Checkout from './components/Checkout';
+import Checkout from './components/Checkout';
+import AddBook from './components/AddBook';
 
 function App() {
   const loc = useLocation()
@@ -28,19 +30,35 @@ function App() {
         <Route path='/' element={ <Login/> }/>
 
         {/* daftar buku */}
-        <Route path='daftar-buku'>
-          <Route index element={ <BookList/> } />
+        <Route path='user'>
+          <Route path='buku'>
+            <Route index element={ <BookList/> } />
 
-          <Route path='detail' element={ <BookDetail/> } />
+            <Route path='detail' element={ <BookDetail/> } />
+          </Route>
         </Route>
 
         {/* Keranjang */}
         <Route path='keranjang' element={ <Cart/> }/>
 
         {/* CHECKOUT */}
-        {/* <Route path='checkout' element={ <Checkout/> }/> */}
+        <Route path='checkout' element={ <Checkout/> }/>
 
         < Route exact path="/account" element={<AccountUser />} />
+
+
+        {/* ADMIN */}
+        <Route path='admin'>
+          {/* DAFTAR BUKU */}
+          <Route path='buku'>
+            <Route index element={ <BookList/> } />
+
+            <Route path='detail' element={ <BookDetail/> } />
+
+            <Route path='tambah' element={ <AddBook/> }/>
+          </Route>
+        </Route>
+        {/* END ADMIN */}
 
       </Routes>
 

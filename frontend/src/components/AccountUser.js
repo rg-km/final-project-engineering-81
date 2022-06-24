@@ -4,6 +4,7 @@ import { Box, Stack, SimpleGrid, Container } from '@chakra-ui/react'
 import contentAkunUser from '../subComponents/contentAkunUser'
 import contentPesananUser from '../subComponents/contentPesananUser'
 import contentDataDiriUser from '../subComponents/contentDataDiriUser'
+import { Link, Navigate } from 'react-router-dom'
 
 
 const FeatureContent = ({ content, ...rest }) => {
@@ -71,14 +72,17 @@ const AccountUser = () => {
                     </Box>
                     <br/>
                     
-                    <Box 
-                    as='button' 
-                    fontSize='xl' 
-                    fontWeight='semibold' 
-                    color='red'
-                    _active={{ transform: 'scale(0.9)' }}>
-                        Keluar
-                    </Box>
+                    <Link to='/' replace={true}> 
+                        <Box 
+                        as='button' 
+                        fontSize='xl' 
+                        fontWeight='semibold' 
+                        color='red'
+                        _active={{ transform: 'scale(0.9)' }}
+                        >
+                            Keluar
+                        </Box>
+                    </Link>
                 </Box>
 
                 <FeatureContent w='80%'

@@ -2,8 +2,11 @@ import '../styles/Login.css'
 import { Button, Input, Image } from "@chakra-ui/react";
 import logo from '../assets/logo-dark.png'
 import { Link } from 'react-router-dom';
+import RegisterModal from './RegisterModal';
 
 export default function Login(){
+    const roleUser = 'admin'
+
     return(
         <div className="container">
             <div className='left'>
@@ -19,9 +22,12 @@ export default function Login(){
                 </div>
 
                 <div className='btnLogin'>
-                    <Link to={'daftar-buku'}>
+                    <Link to={roleUser == 'admin' ? '/admin/buku' : '/user/buku'}>
                         <Button colorScheme={'#112B3C'}>Login</Button>
                     </Link>
+                </div>
+                <div className='btnLogin'>
+                    <RegisterModal />
                 </div>
             </div>
 
