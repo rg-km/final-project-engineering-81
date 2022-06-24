@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import Cart from './components/Cart';
 import AccountUser from './components/AccountUser';
 import Checkout from './components/Checkout';
+import AddBook from './components/AddBook';
 
 function App() {
   const loc = useLocation()
@@ -51,6 +52,8 @@ function App() {
             <Route index element={ <BookList/> } />
 
             <Route path='detail' element={ <BookDetail/> } />
+
+            <Route path='tambah' element={ <AddBook/>}/>
           </Route>
         </Route>
         {/* END ADMIN */}
