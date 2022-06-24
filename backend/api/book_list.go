@@ -26,7 +26,7 @@ type Book struct {
 }
 
 type BookListSuccessResponse struct {
-	Books []Book `json:books`
+	Books []Book `json:"books"`
 }
 
 func (api *API) bookList(w http.ResponseWriter, req *http.Request) {

@@ -4,7 +4,7 @@ import { Box, Stack, SimpleGrid, Container } from '@chakra-ui/react'
 import contentAkunUser from '../subComponents/contentAkunUser'
 import contentPesananUser from '../subComponents/contentPesananUser'
 import contentDataDiriUser from '../subComponents/contentDataDiriUser'
-import { Link, Navigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const FeatureContent = ({ content, ...rest }) => {
@@ -19,13 +19,27 @@ const FeatureContent = ({ content, ...rest }) => {
 
 
 const AccountUser = () => {
-    const [contentActive, setcontentActive] = useState('Akun Saya')
+    const [contentActive, setcontentActive] = useState('Pesanan Saya')
 
     return (
         <SimpleGrid column={1}>
             <Container maxW='container.xl' mt={100}>
             <Stack spacing={8} direction='row' >
                 <Box w='20%' h='300' p={8} shadow='md' borderWidth='1px' textAlign='left'>
+                    <Box  
+                    as='button'
+                    mb={3}
+                    color= {contentActive === 'Pesanan Saya' ? '#1DC9A1' : '#000'} 
+                    fontSize='xl'
+                    fontWeight='semibold'
+                    _hover={{ color: '#1DC9A1' }} 
+                    _active={{ color: '#1DC9A1', transform: 'scale(0.9)' }}
+                    onClick={ () => setcontentActive('Pesanan Saya') }
+                    >
+                        Pesanan Saya
+                    </Box>
+                    <br/>
+
                     <Box 
                     as='button'
                     mb={3}
@@ -44,7 +58,7 @@ const AccountUser = () => {
 
                     <Box 
                     as='button'
-                    mb={3}
+                    mb={16}
                     color= {contentActive === 'Akun Saya' ? '#1DC9A1' : '#000'} 
                     fontSize='xl'
                     fontWeight='semibold' 
@@ -58,19 +72,7 @@ const AccountUser = () => {
                     </Box>
                     <br/>
 
-                    <Box  
-                    as='button'
-                    mb={16}
-                    color= {contentActive === 'Pesanan Saya' ? '#1DC9A1' : '#000'} 
-                    fontSize='xl'
-                    fontWeight='semibold'
-                    _hover={{ color: '#1DC9A1' }} 
-                    _active={{ color: '#1DC9A1', transform: 'scale(0.9)' }}
-                    onClick={ () => setcontentActive('Pesanan Saya') }
-                    >
-                        Pesanan Saya
-                    </Box>
-                    <br/>
+                    
                     
                     <Link to='/' replace={true}> 
                         <Box 

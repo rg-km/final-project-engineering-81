@@ -30,20 +30,18 @@ function App() {
         <Route path='/' element={ <Login/> }/>
 
         {/* daftar buku */}
-        <Route path='daftar-buku'>
-          <Route index element={ <BookList/> } />
-
-          <Route path='detail' element={ <BookDetail/> } />
+        <Route path='user'>
+          <Route path='buku'>
+            <Route index element={ <BookList/> } />
+            <Route path='detail' element={ <BookDetail/> } />
+          </Route>
+          
+          {/* Keranjang */}
+          <Route path='keranjang' element={ <Cart/> }/>
+          <Route path="akun" element={<AccountUser />} />
+          {/* CHECKOUT */}
+          <Route path='checkout' element={ <Checkout/> }/>
         </Route>
-
-        {/* Keranjang */}
-        <Route path='keranjang' element={ <Cart/> }/>
-
-        {/* CHECKOUT */}
-        <Route path='checkout' element={ <Checkout/> }/>
-
-        < Route exact path="/account" element={<AccountUser />} />
-
 
         {/* ADMIN */}
         <Route path='admin'>
@@ -53,7 +51,7 @@ function App() {
 
             <Route path='detail' element={ <BookDetail/> } />
 
-            <Route path='tambah' element={ <AddBook/>}/>
+            <Route path='tambah' element={ <AddBook/> }/>
           </Route>
         </Route>
         {/* END ADMIN */}
