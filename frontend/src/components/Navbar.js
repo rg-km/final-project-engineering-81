@@ -27,13 +27,24 @@ export default function Navbar(){
             </Link>
 
             <div className='tools'>
-                <Link to={'/keranjang'}>
-                    <i className="bi bi-cart3"></i>
-                </Link>
-                
-                <Link to={'/account'}>
-                    <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif' alt='user'/>
-                </Link>
+                {user == 'admin' 
+                    ?
+                    <>
+                        <Link to={'/admin/pesanan'}>
+                            <i className="bi bi-card-list"></i>
+                        </Link>
+                    </>
+                    :
+                    <>
+                        <Link to={'/user/keranjang'}>
+                            <i className="bi bi-cart3"></i>
+                        </Link>
+                        
+                        <Link to={'/user/account'}>
+                            <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif' alt='user'/>
+                        </Link>
+                    </>
+                }
             </div>
         </div>
     )

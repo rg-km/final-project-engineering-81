@@ -69,7 +69,7 @@ export default function Checkout(){
                 
                 <div className='co-address'>
                     <div className='title'>
-                        <h2><i class="bi bi-geo-alt"></i>Alamat Tujuan Pengiriman</h2>
+                        <h2><i className="bi bi-geo-alt"></i>Alamat Tujuan Pengiriman</h2>
                         <h2 className='green'>Ubah Alamat</h2>
                     </div>
                     <h2>

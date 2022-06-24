@@ -1,13 +1,11 @@
 import { Button } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom'
+import { getBookLists } from '../api/bookLists';
 import '../styles/BookList.css'
 
 export default function BookList(){
-    let items = ['Item 1','Item 2','Item 3','Item 4','Item 5',
-                'Item 1','Item 2','Item 3','Item 4','Item 5',
-                'Item 1','Item 2','Item 3','Item 4','Item 5'];
-
     const loc = useLocation()
     const pathName = loc.pathname
     const splitPath = pathName.split('/')
@@ -21,7 +19,25 @@ export default function BookList(){
     };
 
     const [productActive, setProductActive] = useState('all')
-    
+
+    // API
+    const [ bookLists, setBookLists ] = useState([]);
+
+    const loadBookLists = async () =>{
+        try {
+            const booksData = await getBookLists()
+            setBookLists(booksData.items)
+            console.log(bookLists);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        loadBookLists();
+        console.log(bookLists);
+    }, []);
+
     return(
         <div className='container-bookList'>
             {user ?
@@ -66,17 +82,17 @@ export default function BookList(){
                 : null}
 
             <div className='book-items'>
-                {items.map((item, idx)=>{
+                {bookLists.map((item, index)=>{
                     return(
-                        <Link to={link}>
+                        <Link to={link} key={item.id}>
                             <div className='card'>
-                                <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif'/>
+                                <img src={item.volumeInfo.imageLinks.thumbnail}/>
                                 <div className='detail'>
                                     <div className='writer-show'>
-                                        <h3><b>Nama Penulis</b></h3>
-                                        {user ? <h3>Tampil</h3> : ''}
+                                        <h3><b>{item.volumeInfo.authors}</b></h3> 
+                                        {user=='admin' ? <h3>{item.saleInfo.isEbook ? 'Tampil' : 'Arsip'}</h3> : ''}
                                     </div>
-                                    <h2>Judul Buku</h2>
+                                    <h2>{item.volumeInfo.title}</h2>
                                     <h2 className='green'>Rp. 00.000</h2>
                                     {user ? <h3>300 Terjual</h3> : ''}
                                 </div>
