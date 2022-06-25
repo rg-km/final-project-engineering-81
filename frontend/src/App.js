@@ -10,6 +10,7 @@ import Cart from './components/Cart';
 import AccountUser from './components/AccountUser';
 import Checkout from './components/Checkout';
 import AddBook from './components/AddBook';
+import accountStore from './store/accountStore';
 
 function App() {
   const loc = useLocation()
