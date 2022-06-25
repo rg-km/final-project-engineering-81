@@ -10,7 +10,7 @@ import { testGetLogin } from '../api/login';
 export default function Login(){
     const navigate =  useNavigate()
     const [formLogin, setFormLogin] = useState({})
-    const [error, setError] = useState('asa')
+    const [error, setError] = useState('')
     const [isLoggedIn, setIsLoggedIn] = useState(false)
 
     const handleLogin = async()=>{
