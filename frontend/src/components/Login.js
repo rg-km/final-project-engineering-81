@@ -5,9 +5,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
 import axios from "axios"
 import { useEffect, useState } from 'react';
-import { Field, Form } from 'formik';
 import { testGetLogin } from '../api/login';
-import ErrorMessage from '../subComponents/ErrorMessage'
 
 export default function Login(){
     const navigate =  useNavigate()
