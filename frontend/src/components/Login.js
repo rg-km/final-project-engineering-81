@@ -3,14 +3,18 @@ import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import logo from '../assets/logo-dark.png'
 import { useNavigate } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
-import { useState } from 'react';
-import { getLogin } from '../api/login';
+import { useEffect, useState } from 'react';
+import { getLogin } from '../api/account';
+import useAccountStore from '../store/accountStore';
 
 export default function Login(){
     const navigate =  useNavigate()
     const [formLogin, setFormLogin] = useState({})
     const [error, setError] = useState()
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    const addDataUser = useAccountStore((state)=>state.addAccount)
+    const {account} = useAccountStore()
     
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -18,27 +22,32 @@ export default function Login(){
             ...prevValues,
             [name] : value,
         }))
-        setError(false)
+        setError()
     }
     
     const handleLogin = async event =>{
         event.preventDefault();
 
         const accessLogin = await getLogin(formLogin)
-        if(accessLogin){
-            // setIsLoggedIn(true)
-            console.log(accessLogin);
+        
+        if(accessLogin?.status == 200){
+            setIsLoggedIn(true)
+            addDataUser(accessLogin.data)
         } else{
             setError('Invalid Email or Password')
         }
     }
 
     if(isLoggedIn){
-        if(formLogin.email == 'admin'){
+        if(account.email == 'ruben@gmail.com'){
             navigate('/admin/buku')
-        } else if (formLogin.email == 'user'){
+        } 
+        else {
             navigate('/user/buku')
         }
+        // else if (formLogin.email == 'user'){
+        //     navigate('/user/buku')
+        // }
     }
 
     return(

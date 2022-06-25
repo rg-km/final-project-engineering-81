@@ -10,6 +10,7 @@ import Cart from './components/Cart';
 import AccountUser from './components/AccountUser';
 import Checkout from './components/Checkout';
 import AddBook from './components/AddBook';
+import accountStore from './store/accountStore';
 
 function App() {
   const loc = useLocation()
@@ -19,7 +20,7 @@ function App() {
     <div className='App'>
       {/* Navbar */}
       {
-        pathName == '/' ? null 
+        pathName === '/' ? null 
         : 
         <Navbar/>
       }
@@ -29,8 +30,9 @@ function App() {
         {/* Login */}
         <Route path='/' element={ <Login/> }/>
 
-        {/* daftar buku */}
+        {/* USER */}
         <Route path='user'>
+          {/* daftar buku */}
           <Route path='buku'>
             <Route index element={ <BookList/> } />
             <Route path='detail' element={ <BookDetail/> } />
@@ -42,12 +44,6 @@ function App() {
           {/* CHECKOUT */}
           <Route path='checkout' element={ <Checkout/> }/>
         </Route>
-
-        
-
-        
-
-        
 
 
         {/* ADMIN */}
@@ -68,7 +64,7 @@ function App() {
 
       {/* Footer */}
       {
-        pathName == '/' ? null 
+        pathName === '/' ? null 
         : 
         <Footer/>
       }

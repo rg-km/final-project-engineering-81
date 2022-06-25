@@ -1,6 +1,7 @@
 import '../styles/Navbar.css'
 import logo from '../assets/logo-light.png'
 import { Link, useLocation } from 'react-router-dom'
+import { Button } from '@chakra-ui/react'
 
 
 
@@ -16,6 +17,10 @@ export default function Navbar(){
         user = 'admin'
         link = '/admin/buku'
     };
+
+    const handleLogedOut = async => {
+        
+    } 
 
     return(
         <div className="navbar-container">
@@ -33,6 +38,9 @@ export default function Navbar(){
                         <Link to={'/admin/pesanan'}>
                             <i className="bi bi-card-list"></i>
                         </Link>
+                        <Button>
+                            <i className="bi bi-box-arrow-right"></i>
+                        </Button>
                     </>
                     :
                     <>
