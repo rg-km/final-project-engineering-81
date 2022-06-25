@@ -1,39 +1,16 @@
 import '../styles/Login.css'
-import { Alert, AlertIcon, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import logo from '../assets/logo-dark.png'
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
-import axios from "axios"
-import { useEffect, useState } from 'react';
-import { testGetLogin } from '../api/login';
+import { useState } from 'react';
+import { getLogin } from '../api/login';
 
 export default function Login(){
     const navigate =  useNavigate()
     const [formLogin, setFormLogin] = useState({})
-    const [error, setError] = useState('')
+    const [error, setError] = useState()
     const [isLoggedIn, setIsLoggedIn] = useState(false)
-
-    const handleLogin = async()=>{
-        try {
-            const getLogin = await axios.post(
-                "http://localhost:8080/api/user/login",
-                {
-                    email : "ruben@gmail.com",
-                    password : "ruben123"
-                },
-                {
-                  headers: {
-                    "Access-Control-Allow-Origin" : "*",
-                  },
-                  withCredentials: true,
-                }
-              )
-            console.log("getLogin");
-            return (getLogin)
-        } catch (error) {
-            console.log(error);
-        }
-    }
     
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -41,16 +18,17 @@ export default function Login(){
             ...prevValues,
             [name] : value,
         }))
+        setError(false)
     }
     
-    const testHandleLogin = async event =>{
+    const handleLogin = async event =>{
         event.preventDefault();
-        
-        try {
-            await testGetLogin(formLogin.email, formLogin.password)
-            setIsLoggedIn(true)
-        } catch (error) {
-            console.log("Login gagal");
+
+        const accessLogin = await getLogin(formLogin)
+        if(accessLogin){
+            // setIsLoggedIn(true)
+            console.log(accessLogin);
+        } else{
             setError('Invalid Email or Password')
         }
     }
@@ -71,7 +49,7 @@ export default function Login(){
                 </div>
 
                 {/* LOGIN FORM */}
-                <form onSubmit={testHandleLogin}>
+                <form onSubmit={handleLogin}>
                     <div className='inputLogin'>
                             {error ?
                                 <div className='error'>
@@ -100,6 +78,7 @@ export default function Login(){
                             placeholder='Password' 
                             type='password'
                             onChange={handleOnChange}
+                            name='password'
                             />
                         </FormControl>
                     </div>
