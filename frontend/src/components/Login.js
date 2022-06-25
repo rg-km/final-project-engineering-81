@@ -1,11 +1,69 @@
 import '../styles/Login.css'
-import { Button, Input, Image } from "@chakra-ui/react";
+import { Alert, AlertIcon, Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import logo from '../assets/logo-dark.png'
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
+import axios from "axios"
+import { useEffect, useState } from 'react';
+import { Field, Form } from 'formik';
+import { testGetLogin } from '../api/login';
+import ErrorMessage from '../subComponents/ErrorMessage'
 
 export default function Login(){
-    const roleUser = 'admin'
+    const navigate =  useNavigate()
+    const [formLogin, setFormLogin] = useState({})
+    const [error, setError] = useState('')
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+    const handleLogin = async()=>{
+        try {
+            const getLogin = await axios.post(
+                "http://localhost:8080/api/user/login",
+                {
+                    email : "ruben@gmail.com",
+                    password : "ruben123"
+                },
+                {
+                  headers: {
+                    "Access-Control-Allow-Origin" : "*",
+                  },
+                  withCredentials: true,
+                }
+              )
+            console.log("getLogin");
+            return (getLogin)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    
+    const handleOnChange = (e) => {
+        const { name, value } = e.target
+        setFormLogin((prevValues)=>({
+            ...prevValues,
+            [name] : value,
+        }))
+    }
+    
+    const testHandleLogin = async event =>{
+        event.preventDefault();
+        
+        try {
+            await testGetLogin(formLogin.email, formLogin.password)
+            setIsLoggedIn(true)
+        } catch (error) {
+            console.log("Login gagal");
+            setError('Invalid Email or Password')
+        }
+    }
+
+    if(isLoggedIn){
+        if(formLogin.email == 'admin'){
+            navigate('/admin/buku')
+        } else if (formLogin.email == 'user'){
+            navigate('/user/buku')
+        }
+    }
 
     return(
         <div className="container">
@@ -14,18 +72,52 @@ export default function Login(){
                     Welcome Back
                 </div>
 
-                <div className='inputLogin'>
-                    <p>Username</p>
-                    <Input placeholder='Enter Your Username'/>
-                    <p>Password</p>
-                    <Input placeholder='Password' type='password'/>
-                </div>
+                {/* LOGIN FORM */}
+                <form onSubmit={testHandleLogin}>
+                    <div className='inputLogin'>
+                            {error ?
+                                <div className='error'>
+                                    <i className="bi bi-exclamation-circle-fill"></i>
+                                    {error}
+                                </div>
+                                    :''
+                            }
+                        <FormControl isRequired>
+                            <div className='test'>
 
-                <div className='btnLogin'>
-                    <Link to={roleUser == 'admin' ? '/admin/buku' : '/user/buku'}>
-                        <Button colorScheme={'#112B3C'}>Login</Button>
-                    </Link>
-                </div>
+                                <FormLabel>Email</FormLabel>
+                            </div>
+                            <Input 
+                            placeholder='Enter Your Email'
+                            type='text'
+                            name='email'
+                            value={formLogin.email ? formLogin.email : ''}
+                            onChange={handleOnChange}
+                            />
+                        </FormControl>
+                        
+                        <FormControl isRequired>
+                            <FormLabel>Password</FormLabel>
+                            <Input 
+                            placeholder='Password' 
+                            type='password'
+                            onChange={handleOnChange}
+                            />
+                        </FormControl>
+                    </div>
+
+                    <div className='btnLogin'>
+                        <Button 
+                        colorScheme={'#112B3C'}
+                        type='submit'
+                        >
+                            Login
+                        </Button>
+                    </div>
+                    
+                </form>
+                {/* END LOGIN FORM */}
+
                 <div className='btnLogin'>
                     <RegisterModal />
                 </div>

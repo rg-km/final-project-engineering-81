@@ -7,47 +7,43 @@
 
 .container-bookList h1{
     font-weight: 700;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 .container-bookList h2{
-    font-weight: 700;
-    font-size: 18px;
+    font-weight: 600;
+    font-size: 16px;
 }
 
 .container-bookList h3{
     font-weight: 400;
-    font-size: 14px;
+    font-size: 12px;
     color: rgba(152, 146, 146, 1);
 }
 
 .nav-buku-admin{
     display: flex;
     justify-content: space-between;
-    margin: 20px 60px 15px 60px;
+    margin: 0px 60px 15px 60px;
     flex-wrap: wrap;
 }
 
 .nav-buku-admin button, .nav-buku-admin button:hover{
     background-color: transparent;
-    font-size: 20px;
+    font-size: 18px;
 }
 
-.btn-green button{
+.btn-green button, .btn-green button:hover{
     background-color: #1DC9A1;
     color: white;
     border-radius: 15px;
-    font-size: 22px;
+    font-size: 18px;
     padding: 0px 25px 0px 25px;
     margin-left: 50px;
 }
 
 .btn-green button:hover{
     background-color: #25b493;
-    border-radius: 15px;
-    font-size: 22px;
-    padding: 0px 25px 0px 25px;
-    margin-left: 50px;
 }
 
 .container-bookList hr{
@@ -65,6 +61,7 @@
     display: flex;
     width: 160px;
     height: 300px;
+    /* height: fit-content; */
     flex-direction: column;
     margin: 10px;
     padding: 5px;
@@ -86,6 +83,25 @@
 .detail .writer-show{
     display: flex;
     justify-content: space-between;
+}
+
+.author-showing{
+    display: flex;
+    justify-content: space-between;
+}
+
+.author h3{
+    width: 75%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.detail .title{
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .green{
