@@ -1,16 +1,20 @@
 import React from 'react';
 import './App.css';
+import { Routes, Route, useLocation } from 'react-router-dom'
+
 import BookList from './components/BookList';
 import Login from './components/Login';
 import Navbar from './components/Navbar';
-import { Routes, Route, useLocation } from 'react-router-dom'
 import BookDetail from './components/BookDetail';
 import Footer from './components/Footer';
 import Cart from './components/Cart';
 import AccountUser from './components/AccountUser';
 import Checkout from './components/Checkout';
 import AddBook from './components/AddBook';
+import OrderedBooks from './components/OrderedBooks';
+
 import accountStore from './store/accountStore';
+
 
 function App() {
   const loc = useLocation()
@@ -53,11 +57,10 @@ function App() {
           {/* DAFTAR BUKU */}
           <Route path='buku'>
             <Route index element={ <BookList/> } />
-
             <Route path='detail' element={ <BookDetail/> } />
-
             <Route path='tambah' element={ <AddBook/> }/>
           </Route>
+          <Route path='pesanan' element={ <OrderedBooks/> }/>
         </Route>
         {/* END ADMIN */}
 
