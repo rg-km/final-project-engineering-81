@@ -31,6 +31,7 @@ type BookCreateSuccessResponse struct {
 
 type BookListSuccessResponse struct {
 	Books []Book `json:"books"`
+
 }
 
 func (api *API) bookCreate(w http.ResponseWriter, req *http.Request) {
@@ -70,6 +71,7 @@ func (api *API) bookCreate(w http.ResponseWriter, req *http.Request) {
 	}
 
 	encoder.Encode(response)
+
 
 }
 

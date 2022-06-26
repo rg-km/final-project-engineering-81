@@ -11,7 +11,7 @@ const contentPesananUser = () => {
 
     return (
         <VStack>
-            <img src={emptyAnimation} alt="ImageContent" width={300} height={300} />
+            <img src={emptyAnimation} alt="ImageContent" width={300} height={300} draggable={false}/>
             <Heading
                 color={'#1DC9A1'} 
                 fontSize={'2xl'}
@@ -27,7 +27,7 @@ const contentPesananUser = () => {
                 Kamu masih belum pernah berbelanja, ayo mulai berbelanja sekarang. BukuKita memiliki berbagai produk hanya untukmu. Yuk mulia belanja!
             </Text>
             
-            <Link to="/daftar-buku">
+            <Link to="/user/buku">
                 <Button 
                 p='6'
                 mt={'10'}
@@ -39,6 +39,7 @@ const contentPesananUser = () => {
                     Coba Beli 
                 </Button>
             </Link>
+            
             
         </VStack>
     )
