@@ -14,7 +14,9 @@ root.render(
     <ChakraProvider>
       <BrowserRouter>
         <SessionProvider>
-          <App />
+          <CookiesProvider>
+            <App />
+          </CookiesProvider>
         </SessionProvider>
       </BrowserRouter>
     </ChakraProvider>
