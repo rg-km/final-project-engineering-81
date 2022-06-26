@@ -16,6 +16,8 @@ function App() {
   const loc = useLocation()
   const pathName = loc.pathname;
 
+  // const isLoggedIn = 
+
   return (
     <div className='App'>
       {/* Navbar */}

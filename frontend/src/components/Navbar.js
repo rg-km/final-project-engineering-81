@@ -2,6 +2,7 @@ import '../styles/Navbar.css'
 import logo from '../assets/logo-light.png'
 import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@chakra-ui/react'
+import { logout } from '../api/account'
 
 
 
@@ -18,8 +19,9 @@ export default function Navbar(){
         link = '/admin/buku'
     };
 
-    const handleLogedOut = async => {
-        
+    const handleLogedOut = async() => {
+        const logoutAccount = await logout()
+        console.log(logoutAccount);
     } 
 
     return(
@@ -38,7 +40,7 @@ export default function Navbar(){
                         <Link to={'/admin/pesanan'}>
                             <i className="bi bi-card-list"></i>
                         </Link>
-                        <Button>
+                        <Button onClick={handleLogedOut}>
                             <i className="bi bi-box-arrow-right"></i>
                         </Button>
                     </>
