@@ -22,7 +22,7 @@ export default function BookDetail(){
         console.log(detailBook);
     }, [])
 
-    console.log(detailBook.volumeInfo.imageLinks.thumbnail);
+    // console.log(detailBook.volumeInfo.imageLinks.thumbnail);
     return(
         <div className='container-bookDetail'>
             {
