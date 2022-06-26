@@ -9,12 +9,12 @@ export default function BookList(){
     const pathName = loc.pathname
     const splitPath = pathName.split('/')
     
-    let link = '/user/buku/detail';
+    let link = '/user/buku';
     let user = '';
 
     if(splitPath[1] === 'admin'){
         user = 'admin'
-        link = '/admin/buku/detail'
+        link = '/admin/buku'
     };
 
     const [productActive, setProductActive] = useState('all')
@@ -24,7 +24,9 @@ export default function BookList(){
 
     const loadBookLists = async () =>{
         const booksData = await getBookLists()
-        setBookLists(booksData.items)
+        if(booksData.items){
+            setBookLists(booksData.items)
+        }
     }
 
     useEffect(() => {
@@ -78,7 +80,7 @@ export default function BookList(){
             <div className='book-items'>
                 {bookLists.map((item, index)=>{
                     return(
-                        <Link to={link} key={item.id}>
+                        <Link to={`${link}/${item.id}`} key={item.id}>
                             <div className='card'>
                                 <img src={item.volumeInfo.imageLinks.thumbnail}/>
                                 <div className='detail'>

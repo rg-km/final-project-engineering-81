@@ -9,6 +9,7 @@ const useAccountStore = create(persist(devtools(
         addAccount : (user) => set(produce((state) => {
             state.account = user
         })),
+
     })
 ), {name:"account"}))
 

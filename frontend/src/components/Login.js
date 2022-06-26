@@ -1,28 +1,32 @@
 import '../styles/Login.css'
-import { Button, cookieStorageManager, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import logo from '../assets/logo-dark.png'
 import { useNavigate } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getLogin } from '../api/account';
 import useAccountStore from '../store/accountStore';
+import { SessionContext } from '../context/SessionContext';
+import { useCookies } from 'react-cookie';
 
 export default function Login(){
     const navigate =  useNavigate()
     const [formLogin, setFormLogin] = useState({})
     const [error, setError] = useState()
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const isLoggedIn = useContext(SessionContext).isLoggedIn
+    const setIsLoggedIn = useContext(SessionContext).setIsLoggedIn
 
     const addDataUser = useAccountStore((state)=>state.addAccount)
     const {account} = useAccountStore()
-    
+
+    const [cookies, setCookie] = useCookies(['token'])
+
     const handleOnChange = (e) => {
         const { name, value } = e.target
         setFormLogin((prevValues)=>({
             ...prevValues,
             [name] : value,
         }))
-        setError()
     }
     
     const handleLogin = async event =>{
@@ -34,10 +38,13 @@ export default function Login(){
             setIsLoggedIn(true)
             if(accessLogin.data.email == 'ruben@gmail.com'){
                 accessLogin.data.role = 'admin'
-            } else{
+            } else if(accessLogin.data.email == 'user@gmail.com'){
                 accessLogin.data.role = 'user'
+            } else if(accessLogin.data.email == 'donatur@gmail.com'){
+                accessLogin.data.role = 'donatur'
             }
             addDataUser(accessLogin.data)
+            setCookie('token', accessLogin.data.token, { path:'/'})
         } else{
             setError('Invalid Email or Password')
         }
@@ -45,7 +52,7 @@ export default function Login(){
 
     useEffect(()=>{
         if (isLoggedIn){
-            navigate(`${account.role}/buku`)
+            navigate(`${account.role}/buku`, { replace:true })
         }
     },[isLoggedIn])
 
@@ -112,6 +119,7 @@ export default function Login(){
                 BukuKita
                 <img src={logo}/>
             </div>
+            
         </div>
     )
 }
