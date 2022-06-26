@@ -1,5 +1,4 @@
 import { Button } from '@chakra-ui/react';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import { getBookLists } from '../api/bookLists';
@@ -13,29 +12,24 @@ export default function BookList(){
     let link = '/user/buku/detail';
     let user = '';
 
-    if(splitPath[1] == 'admin'){
+    if(splitPath[1] === 'admin'){
         user = 'admin'
         link = '/admin/buku/detail'
     };
 
     const [productActive, setProductActive] = useState('all')
 
-    // API
+    // API GET BOOK LISTS
     const [ bookLists, setBookLists ] = useState([]);
 
     const loadBookLists = async () =>{
-        try {
-            const booksData = await getBookLists()
-            setBookLists(booksData.items)
-            console.log(bookLists);
-        } catch (error) {
-            console.log(error);
-        }
+        const booksData = await getBookLists()
+        setBookLists(booksData.items)
     }
 
     useEffect(() => {
         loadBookLists();
-        console.log(bookLists);
+        // console.log(bookLists);
     }, []);
 
     return(
@@ -44,28 +38,28 @@ export default function BookList(){
                 <>
                     <div className='nav-buku-admin'>
                         <Button 
-                            color = {productActive == 'all' ? '#1DC9A1' : 'black'}
+                            color = {productActive === 'all' ? '#1DC9A1' : 'black'}
                             onClick = {() => setProductActive('all')}
                         >
                             Semua Produk
                         </Button> 
                         
                         <Button 
-                            color={productActive == 'show' ? '#1DC9A1' : 'black'}
+                            color={productActive === 'show' ? '#1DC9A1' : 'black'}
                             onClick = {() => setProductActive('show')}
                         >
                             Produk Ditampilkan
                         </Button>
                         
                         <Button 
-                            color={productActive == 'arsip' ? '#1DC9A1' : 'black'}
+                            color={productActive === 'arsip' ? '#1DC9A1' : 'black'}
                             onClick = {() => setProductActive('arsip')}
                         >
                             Produk Diarsipkan
                         </Button>
 
                         <Button 
-                            color={productActive == 'donate' ? '#1DC9A1' : 'black'}
+                            color={productActive === 'donate' ? '#1DC9A1' : 'black'}
                             onClick = {() => setProductActive('donate')}
                         >
                             Produk Donasi
@@ -88,11 +82,15 @@ export default function BookList(){
                             <div className='card'>
                                 <img src={item.volumeInfo.imageLinks.thumbnail}/>
                                 <div className='detail'>
-                                    <div className='writer-show'>
-                                        <h3><b>{item.volumeInfo.authors}</b></h3> 
+                                    <div className='author-showing'>
+                                        <div className='author'>
+                                            <h3><b>{item.volumeInfo.authors ? item.volumeInfo.authors[0] : ''}</b></h3> 
+                                        </div>
                                         {user=='admin' ? <h3>{item.saleInfo.isEbook ? 'Tampil' : 'Arsip'}</h3> : ''}
                                     </div>
-                                    <h2>{item.volumeInfo.title}</h2>
+                                    <div className='title'>
+                                        <h2>{item.volumeInfo.title}</h2>
+                                    </div>
                                     <h2 className='green'>Rp. 00.000</h2>
                                     {user ? <h3>300 Terjual</h3> : ''}
                                 </div>

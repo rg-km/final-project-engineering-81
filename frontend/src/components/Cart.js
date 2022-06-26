@@ -42,7 +42,7 @@ export default function Cart(){
                         </div>
                     </div>
                     <div className='next'>
-                        <Link to={'/checkout'}>
+                        <Link to={'/user/checkout'}>
                             <Button className='btn'>Lanjut Ke Pembayaran</Button>
                         </Link>
                     </div>

@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-around;
     margin: 60px;
-    font-family: 'Inter';
+    font-family: 'Inter', sans-serif;
 }
 
 .container-addBook h1{
