@@ -22,8 +22,8 @@ type Register struct {
 
 type LoginSuccessResponse struct {
 	Email string `json:"email"`
-	Token string `json:"token"`
 	Role  string `json:"role"`
+	Token string `json:"token"`
 }
 
 type RegisterSuccessResponse struct {
@@ -103,7 +103,7 @@ func (api *API) login(w http.ResponseWriter, req *http.Request) {
 		Path:    "/",
 	})
 
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Email: *res, Token: tokenString, Role: *res})
+	json.NewEncoder(w).Encode(LoginSuccessResponse{Email: *res, Role: *userRole, Token: tokenString})
 }
 
 func (api *API) logout(w http.ResponseWriter, req *http.Request) {
