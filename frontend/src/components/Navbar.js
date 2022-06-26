@@ -1,10 +1,21 @@
 import '../styles/Navbar.css'
 import logo from '../assets/logo-light.png'
-import { Link, useLocation } from 'react-router-dom'
-
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { Button } from '@chakra-ui/react'
+import { logout } from '../api/account'
+import { useCookies } from 'react-cookie';
+import { useContext, useEffect } from 'react'
+import { SessionContext } from '../context/SessionContext'
+import useAccountStore from '../store/accountStore'
 
 
 export default function Navbar(){
+    const isLoggedIn = useContext(SessionContext).isLoggedIn
+    const setIsLoggedIn = useContext(SessionContext).setIsLoggedIn
+    const addDataUser = useAccountStore((state)=>state.addAccount)
+    const {account} = useAccountStore()
+    const navigate = useNavigate()
+
     const loc = useLocation()
     const pathName = loc.pathname
     const splitPath = pathName.split('/')
@@ -16,6 +27,21 @@ export default function Navbar(){
         user = 'admin'
         link = '/admin/buku'
     };
+
+    const [cookies, setCookie, removeCookie] = useCookies(['token'])
+
+    const handleLogedOut = async() => {
+        const logoutAccount = await logout(cookies)
+        setIsLoggedIn(false)
+        removeCookie('token')
+        addDataUser()
+    } 
+
+    useEffect(()=>{
+        if (!isLoggedIn){
+            navigate('/')
+        }
+    },[isLoggedIn])
 
     return(
         <div className="navbar-container">
@@ -33,6 +59,9 @@ export default function Navbar(){
                         <Link to={'/admin/pesanan'}>
                             <i className="bi bi-card-list"></i>
                         </Link>
+                        <Button onClick={handleLogedOut}>
+                            <i className="bi bi-box-arrow-right"></i>
+                        </Button>
                     </>
                     :
                     <>

@@ -8,6 +8,6 @@ export const getBookLists =  async () => {
         // console.log(data.results);
         return (data)
     } catch (error) {
-        console.log(error);
+        return (console.log(error))
     }
 };

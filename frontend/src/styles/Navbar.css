@@ -43,7 +43,12 @@
     margin-left: 30px;
 }
 
-.bi-cart3{
+.tools .bi{
     color: white;
     font-size: 30px;
+}
+
+
+.tools button, .tools button:hover{
+    background-color: transparent;
 }
