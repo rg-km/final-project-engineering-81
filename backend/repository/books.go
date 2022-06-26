@@ -16,7 +16,9 @@ func (u *BookRepository) CreateBook(Book, error) (int64, error) {
 
 	var sqlStatement string
 
-	sqlStatement = "insert into books (judul, penerbit, tahun_terbit, jumlah_halaman, isbn, kategori, bahasa, berat, harga, kondisi, deskripsi, stok values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+	sqlStatement = `insert into books (
+		judul, penerbit, tahun_terbit, jumlah_halaman, isbn, kategori, bahasa, berat, harga, kondisi, deskripsi, stok 
+		values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
 
 	books, err := u.db.Query(sqlStatement)
 
@@ -25,6 +27,20 @@ func (u *BookRepository) CreateBook(Book, error) (int64, error) {
 	}
 
 	return books, nil
+}
+
+func (u *BookRepository) UpdateBook(Book, error) {
+	var sqlStatement string
+
+	sqlStatement = `
+	update books set judul = ?, penerbit = ?, tahun_terbit = ?, jumlah_halaman = ?, isbn = ?, kategori = ?, bahasa = ?, berat = ?, harga = ?, kondisi = ?, deskripsi = ?, stok = ?
+	where id = ?;`
+
+	_, err := u.db.Query(sqlStatement, updateBook.Judul, updateBook.Penerbit, updateBook.TahunTerbit, updateBook.JumlahHalaman, updateBook.ISBN, updateBook.Kategori, updateBook.Bahasa, updateBook.Berat, updateBook.Harga, updateBook.Kondisi, updateBook.Deskripsi, updateBook.Harga)
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func (u *BookRepository) FetchBookByID(id int64) (Book, error) {
