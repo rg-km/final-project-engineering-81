@@ -37,6 +37,11 @@ func main() {
 		deskripsi varchar(255) NOT NULL,
 		stok integer NOT NULL
 	);
+
+	INSERT INTO books(judul, penerbit, tahun_terbit, jumlah_halaman, isbn, kategori, bahasa, berat, harga, kondisi, deskripsi, stok) VALUES
+    ('Bahasa Indonesia 1', 'Gramedia', '2005', '100', '978-200-8767', 'Buku Pelajaran', 'Indonesia', 100, 200, 'Baru', 'Buku Pelajaran Sekolah Dasar', 5),
+	('Bahasa Inggris 2', 'Gramedia', '2015', '100', '978-200-9467', 'Buku Pelajaran', 'English', 100, 300, 'Baru', 'Buku Pelajaran Sekolah Pertama', 5),
+	('Bahasa Indonesia 3', 'Erlangga', '2012', '100', '978-200-3767', 'Buku Pelajaran', 'Indonesia', 100, 400, 'Baru', 'Buku Pelajaran Sekolah Menengah', 5);
 	
 	`)
 
