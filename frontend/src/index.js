@@ -6,15 +6,16 @@ import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react'
 import { BrowserRouter } from 'react-router-dom'
 import { CookiesProvider } from 'react-cookie'
+import { SessionProvider } from './context/SessionContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <ChakraProvider>
       <BrowserRouter>
-      <CookiesProvider>
-        <App />
-      </CookiesProvider>
+        <SessionProvider>
+          <App />
+        </SessionProvider>
       </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import {
     Modal,
     ModalOverlay,
@@ -13,9 +13,16 @@ import {
     FormControl,
     FormLabel,
     Text,
-    Heading
+    Heading,
+    Alert,
+    AlertIcon,
   } from '@chakra-ui/react'
 import { useState } from 'react'
+import { register } from '../api/account'
+import Login from './Login'
+import { SessionContext } from '../context/SessionContext'
+import { useNavigate } from 'react-router-dom'
+import '../styles/Modal.css'
 
 
 const RegisterModal = () => {
@@ -23,24 +30,61 @@ const RegisterModal = () => {
   const { isOpen: isOpenRegistUser, onOpen: onOpenRegistUser, onClose:onCloseRegistUser } = useDisclosure()
   const { isOpen: isOpenRegistDonatur, onOpen: onOpenRegistDonatur, onClose:onCloseRegistDonatur } = useDisclosure()
   
+  const [registerValue, setRegisterValue] = useState({})
+  const [role, setRole] = useState('')
+
+  const [succes, setSucces] = useState('')
+  const [error, setError] = useState('')
+
   const handleAsUser = () => {
     onCloseModalMain()
     onOpenRegistUser()
+    setRole('user')
   }
   const handleAsDonatur = () => {
     onCloseModalMain()
-    onOpenRegistDonatur()
+    onOpenRegistUser()
+    setRole('donatur')
   }
   const handleCancelRegistUser = () => {
     onCloseRegistUser()
     onOpenModalMain()
+    setRole('')
+    setRegisterValue({})
   }
-  const handleCancelRegistDonatur = () => {
-    onCloseRegistDonatur()
-    onOpenModalMain()
+
+  const handleOnChange = (e) =>{
+    const { name, value } = e.target
+    setRegisterValue((prevValue) => ({
+      ...prevValue,
+      [name] : value,
+    }))
+    setError('')
+  }
+
+  const handleRegisterSubmit = async event =>{
+    event.preventDefault()
+    registerValue.Role = role;
+
+    const postRegister = await register(registerValue)
+
+    if(postRegister.data.error){
+      // console.log(postRegister);
+      setError(postRegister.data.error)
+    } else if(postRegister.status == 200){
+      setSucces('Register Berhasil')
+      // console.log(postRegister);
+    }
   }
   
-
+  useEffect(()=>{
+    if(succes){
+      setRole('')
+      setRegisterValue({})
+      setSucces()
+      setError()
+    }
+  }, [succes])
 
   return (
     <>
@@ -124,63 +168,77 @@ const RegisterModal = () => {
       <Modal isOpen={isOpenRegistUser} onClose={onCloseRegistUser} closeOnOverlayClick={false}>
       <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Create an account as User</ModalHeader>
+          <ModalHeader>
+            Create an account as User
+              {succes?
+                <>
+                  <Alert status='success'>
+                    <AlertIcon/>
+                    {succes}
+                  </Alert>
+                </>
+              :''}
+              {error?
+                <>
+                <Alert status='error'>
+                  <AlertIcon />
+                  {error}
+                </Alert>
+                </>
+                :''
+              }
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Username</FormLabel>
-              <Input placeholder='Username' />
-            </FormControl>
+          {/* START FORM */}
+          <form 
+          onSubmit={handleRegisterSubmit}
+          >
+            <ModalBody pb={6}>
 
-            <FormControl mt={4}>
-              <FormLabel>Password</FormLabel>
-              <Input placeholder='Password' />
-            </FormControl>
-          </ModalBody>
+              <FormControl>
+                <FormLabel>Name</FormLabel>
+                <Input 
+                type='text'
+                placeholder='Name'
+                name='Name'
+                value={registerValue.Name?registerValue.Name:''}
+                onChange={handleOnChange}
+                />
+              </FormControl>
+              
+              <FormControl>
+                <FormLabel>Email</FormLabel>
+                <Input 
+                type='email'
+                placeholder='Email'
+                name='Email'
+                value={registerValue.Email?registerValue.Email:''}
+                onChange={handleOnChange}
+                />
+              </FormControl>
 
-          <ModalFooter>
-            <Button colorScheme='green' mr={3}>
-              Daftar
-            </Button>
-            <Button onClick={handleCancelRegistUser}>Batal</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+              <FormControl mt={4}>
+                <FormLabel>Password</FormLabel>
+                <Input 
+                type='password'
+                placeholder='Password' 
+                name='Password'
+                value={registerValue.Password?registerValue.Password:''}
+                onChange={handleOnChange}
+                />
+              </FormControl>
+            </ModalBody>
 
-      {/* MODAL REGISTER DONATUR */}
-      <Modal isOpen={isOpenRegistDonatur} onClose={onCloseRegistDonatur} closeOnOverlayClick={false}>
-      <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Create an account as Donatur</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody pb={6}>
-            <FormControl>
-              <FormLabel>Username</FormLabel>
-              <Input placeholder='Username' />
-            </FormControl>
-
-            <FormControl mt={4}>
-              <FormLabel>Password</FormLabel>
-              <Input placeholder='Password' />
-            </FormControl>
-
-            <FormControl mt={4}>
-              <FormLabel>Full Name</FormLabel>
-              <Input placeholder='Full Name' />
-            </FormControl>
-
-            <FormControl mt={4}>
-              <FormLabel>Address</FormLabel>
-              <Input placeholder='Address' />
-            </FormControl>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='green' mr={3}>
-              Daftar
-            </Button>
-            <Button onClick={handleCancelRegistDonatur}>Batal</Button>
-          </ModalFooter>
+            <ModalFooter>
+              <Button colorScheme='green' mr={3}
+              type='submit'
+              >
+                Daftar
+              </Button>
+              <Button onClick={handleCancelRegistUser}>Batal</Button>
+            </ModalFooter>
+          </form>
+          {/* END FORM */}
         </ModalContent>
       </Modal>
     </>
