@@ -37,7 +37,7 @@ function App() {
           {/* daftar buku */}
           <Route path='buku'>
             <Route index element={ <BookList/> } />
-            <Route path='detail' element={ <BookDetail/> } />
+            <Route path=':id' element={ <BookDetail/> } />
           </Route>
           
           {/* Keranjang */}
@@ -47,14 +47,13 @@ function App() {
           <Route path='checkout' element={ <Checkout/> }/>
         </Route>
 
-
         {/* ADMIN */}
         <Route path='admin'>
           {/* DAFTAR BUKU */}
           <Route path='buku'>
             <Route index element={ <BookList/> } />
 
-            <Route path='detail' element={ <BookDetail/> } />
+            <Route path=':id' element={ <BookDetail/> } />
 
             <Route path='tambah' element={ <AddBook/> }/>
           </Route>

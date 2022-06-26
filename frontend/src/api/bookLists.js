@@ -1,9 +1,10 @@
 import axios from 'axios'
+const BASE_URL = "https://www.googleapis.com/books/v1/volumes"
 
 export const getBookLists =  async () => {
     try {
         const { data } = await axios.get(
-            "https://www.googleapis.com/books/v1/volumes?q=search+terms"
+            `${BASE_URL}?q=search+terms`
         );
         // console.log(data.results);
         return (data)
@@ -11,3 +12,15 @@ export const getBookLists =  async () => {
         return (console.log(error))
     }
 };
+
+
+export const getBooksDetail = async(id) =>{
+    try {
+        const detail= await axios.get(
+            `${BASE_URL}/${id}`
+        )
+        return detail
+    } catch (error) {
+        console.log(error);
+    }
+}

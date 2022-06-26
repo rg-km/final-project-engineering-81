@@ -52,7 +52,7 @@ export default function Login(){
 
     useEffect(()=>{
         if (isLoggedIn){
-            navigate(`${account.role}/buku`)
+            navigate(`${account.role}/buku`, { replace:true })
         }
     },[isLoggedIn])
 
