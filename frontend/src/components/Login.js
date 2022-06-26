@@ -1,5 +1,5 @@
 import '../styles/Login.css'
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button, cookieStorageManager, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import logo from '../assets/logo-dark.png'
 import { useNavigate } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
@@ -32,23 +32,22 @@ export default function Login(){
         
         if(accessLogin?.status == 200){
             setIsLoggedIn(true)
+            if(accessLogin.data.email == 'ruben@gmail.com'){
+                accessLogin.data.role = 'admin'
+            } else{
+                accessLogin.data.role = 'user'
+            }
             addDataUser(accessLogin.data)
         } else{
             setError('Invalid Email or Password')
         }
     }
 
-    if(isLoggedIn){
-        if(account.email == 'ruben@gmail.com'){
-            navigate('/admin/buku')
-        } 
-        else {
-            navigate('/user/buku')
+    useEffect(()=>{
+        if (isLoggedIn){
+            navigate(`${account.role}/buku`)
         }
-        // else if (formLogin.email == 'user'){
-        //     navigate('/user/buku')
-        // }
-    }
+    },[isLoggedIn])
 
     return(
         <div className="container">
