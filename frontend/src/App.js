@@ -37,7 +37,7 @@ function App() {
           {/* daftar buku */}
           <Route path='buku'>
             <Route index element={ <BookList/> } />
-            <Route path='detail' element={ <BookDetail/> } />
+            <Route path=':id' element={ <BookDetail/> } />
           </Route>
           
           {/* Keranjang */}
@@ -53,7 +53,7 @@ function App() {
           <Route path='buku'>
             <Route index element={ <BookList/> } />
 
-            <Route path='detail' element={ <BookDetail/> } />
+            <Route path=':id' element={ <BookDetail/> } />
 
             <Route path='tambah' element={ <AddBook/> }/>
           </Route>

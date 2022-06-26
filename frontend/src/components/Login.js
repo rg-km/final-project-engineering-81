@@ -52,42 +52,9 @@ export default function Login(){
 
     useEffect(()=>{
         if (isLoggedIn){
-            navigate(`${account.role}/buku`)
+            navigate(`${account.role}/buku`, { replace:true })
         }
     },[isLoggedIn])
-
-    const [formLogin, setFormLogin] = useState({});
-
-    const handleOnChange = (e) =>{
-        const { name, value } = e.target
-        setFormLogin((prevValues) => ({
-            ...prevValues,
-            [name] : value,
-        }))
-        console.log(formLogin);
-    }
-
-    
-    const handleFormLogin = async () => {
-        try {
-            const getLogin = await axios.post(
-                "http://localhost:8080/api/user/login",
-                {
-                    email : "ruben@gmail.com",
-                    password : "ruben123"
-                },
-                {
-                  headers: {
-                    "Access-Control-Allow-Origin" : "*",
-                  },
-                  withCredentials: true,
-                }
-              )
-            console.log("getLogin");
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     return(
         <div className="container">

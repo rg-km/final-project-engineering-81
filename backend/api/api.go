@@ -24,7 +24,7 @@ func NewAPI(usersRepo repository.UserRepository, booksRepo repository.BookReposi
 
 	// API with AuthMiddleware:
 	mux.Handle("/api/books", api.GET(api.AuthMiddleWare(http.HandlerFunc(api.bookList))))
-	mux.Handle("/api/create/books", api.POST(api.AuthMiddleWare(http.HandlerFunc(api.bookCreate))))
+	// mux.Handle("/api/create/books", api.POST(api.AuthMiddleWare(http.HandlerFunc(api.bookCreate))))
 
 	// // API with AuthMiddleware and AdminMiddleware
 	mux.Handle("/api/admin/users", api.GET(api.AuthMiddleWare(api.AdminMiddleware(http.HandlerFunc(api.userList)))))
