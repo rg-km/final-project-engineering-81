@@ -1,5 +1,4 @@
 import axios from "axios";
-import useAccountStore from "../store/accountStore";
 
 const BASE_URL = "http://localhost:8080/api/user"
 
@@ -8,9 +7,9 @@ export const getLogin = async(formLogin)=>{
         const getLoginApi = await axios.post(
             `${BASE_URL}/login`,
             formLogin,
-            {credentials: 'include',
-            // withCredentials:true
-        }
+        //     {credentials: 'include',
+        //     // withCredentials:true
+        // }
             // {
             //     withCredentials:true
             // }
@@ -25,11 +24,16 @@ export const getLogin = async(formLogin)=>{
 }
 
 
-export const logout = async()=>{
+export const logout = async(cookies)=>{
     try {
         const logedOut = await axios.post(
             `${BASE_URL}/logout`,
-            // account
+            cookies,
+            {
+                        headers: {Cookie : `token=${cookies.token}`}
+                    }
+            //    { withCredential:true},
+            
         )
         return logedOut
     } catch (error) {

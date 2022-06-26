@@ -7,6 +7,7 @@ import { useContext, useEffect, useState } from 'react';
 import { getLogin } from '../api/account';
 import useAccountStore from '../store/accountStore';
 import { SessionContext } from '../context/SessionContext';
+import { useCookies } from 'react-cookie';
 
 export default function Login(){
     const navigate =  useNavigate()
@@ -17,6 +18,8 @@ export default function Login(){
 
     const addDataUser = useAccountStore((state)=>state.addAccount)
     const {account} = useAccountStore()
+
+    const [cookies, setCookie] = useCookies(['token'])
 
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -41,6 +44,7 @@ export default function Login(){
                 accessLogin.data.role = 'donatur'
             }
             addDataUser(accessLogin.data)
+            setCookie('token', accessLogin.data.token, { path:'/'})
         } else{
             setError('Invalid Email or Password')
         }
