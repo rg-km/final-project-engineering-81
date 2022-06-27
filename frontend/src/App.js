@@ -38,7 +38,7 @@ function App() {
         {/* Login */}
         <Route path='/' element={ <Login/> }/>
 
-        {dataAccount.role ?
+        {isLoggedIn && dataAccount.role ?
         <>
           <Route path={dataAccount.role}>
             {/* daftar buku */}
@@ -69,36 +69,6 @@ function App() {
         :
           ''
         }
-
-        {/* USER 
-        <Route path='user'>
-          {/* daftar buku 
-
-          <Route path='buku'>
-            <Route index element={ <BookList/> } />
-            <Route path=':id' element={ <BookDetail/> } />
-          </Route>
-          
-          {/* Keranjang 
-          <Route path='keranjang' element={ <Cart/> }/>
-          <Route path="akun" element={<AccountUser />} />
-          {/* CHECKOUT 
-          <Route path='checkout' element={ <Checkout/> }/>
-        </Route>
-
-        {/* ADMIN 
-        <Route path='admin'>
-          {/* DAFTAR BUKU
-          <Route path='buku'>
-            <Route index element={ <BookList/> } />
-
-            <Route path=':id' element={ <BookDetail/> } />
-
-            <Route path='tambah' element={ <AddBook/> }/>
-          </Route>
-        </Route>
-        {/* END ADMIN */}
-
       </Routes>
 
 
