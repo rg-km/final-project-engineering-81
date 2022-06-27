@@ -25,17 +25,17 @@ type Book struct {
 	Stok          int    `json:"stok"`
 }
 
-type BookCreateSuccessResponse struct {
-	Books []Book `json:"books"`
-}
+// type BookCreateSuccessResponse struct {
+// 	Books []Book `json:"books"`
+// }
 
 type BookListSuccessResponse struct {
 	Books []Book `json:"books"`
 }
 
-type BookDeleteSuccessResponse struct {
-	Books []Book `json:"books"`
-}
+// type BookDeleteSuccessResponse struct {
+// 	Books []Book `json:"books"`
+// }
 
 // func (api *API) bookCreate(w http.ResponseWriter, req *http.Request) {
 // 	api.AllowOrigin(w, req)

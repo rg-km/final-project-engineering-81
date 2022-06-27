@@ -28,7 +28,7 @@ func (u *BookRepository) FetchBookByID(id int64) (Book, error) {
 	defer row.Close()
 
 	for row.Next() {
-		if err := row.Scan(&book.ID, &book.Judul, &book.Penerbit, &book.TahunTerbit, &book.JumlahHalaman, &book.ISBN, &book.Kategori, &book.Bahasa, &book.Berat, &book.Harga, &book.Kondisi, &book.Deskripsi, &book.Stok); err != nil {
+		if err := row.Scan(&book.ID, &book.Judul, &book.Penulis, &book.Penerbit, &book.TahunTerbit, &book.JumlahHalaman, &book.ISBN, &book.Kategori, &book.Bahasa, &book.Berat, &book.Harga, &book.Kondisi, &book.Deskripsi, &book.Stok); err != nil {
 			return book, err
 		}
 	}
@@ -45,7 +45,7 @@ func (u *BookRepository) FetchBookByJudul(judul string) (Book, error) {
 
 	row := u.db.QueryRow(sqlStatement, judul)
 
-	err := row.Scan(&book.ID, &book.Judul, &book.Penerbit, &book.TahunTerbit, &book.JumlahHalaman, &book.ISBN, &book.Kategori, &book.Bahasa, &book.Berat, &book.Harga, &book.Kondisi, &book.Deskripsi, &book.Stok)
+	err := row.Scan(&book.ID, &book.Judul, &book.Penulis, &book.Penerbit, &book.TahunTerbit, &book.JumlahHalaman, &book.ISBN, &book.Kategori, &book.Bahasa, &book.Berat, &book.Harga, &book.Kondisi, &book.Deskripsi, &book.Stok)
 
 	if err != nil {
 		return book, err
@@ -72,7 +72,7 @@ func (u *BookRepository) FetchBooks() ([]Book, error) {
 
 	for rows.Next() {
 		var book Book
-		if err := rows.Scan(&book.ID, &book.Judul, &book.Penerbit, &book.TahunTerbit, &book.JumlahHalaman, &book.ISBN, &book.Kategori, &book.Bahasa, &book.Berat, &book.Harga, &book.Kondisi, &book.Deskripsi, &book.Stok); err != nil {
+		if err := rows.Scan(&book.ID, &book.Judul, &book.Penulis, &book.Penerbit, &book.TahunTerbit, &book.JumlahHalaman, &book.ISBN, &book.Kategori, &book.Bahasa, &book.Berat, &book.Harga, &book.Kondisi, &book.Deskripsi, &book.Stok); err != nil {
 			return nil, err
 		}
 		books = append(books, book)
