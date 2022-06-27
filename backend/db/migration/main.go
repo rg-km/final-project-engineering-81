@@ -21,6 +21,28 @@ func main() {
 	role varchar(255) NOT NULL,
 	loggedin boolean NOT NULL
 	);
+
+	CREATE TABLE IF NOT EXISTS books (
+		id integer NOT NULL primary key AUTOINCREMENT,
+		judul varchar(255) NOT NULL,
+		penulis varchar(255) NOT NULL,
+		penerbit varchar(255) NOT NULL,
+		tahun_terbit varchar(255) NOT NULL,
+		jumlah_halaman varchar(255) NOT NULL,
+		isbn varchar(255) NOT NULL,
+		kategori varchar(255) NOT NULL,
+		bahasa varchar(255) NOT NULL,
+		berat integer NOT NULL,
+		harga integer NOT NULL,
+		kondisi varchar(255) NOT NULL,
+		deskripsi varchar(255) NOT NULL,
+		stok integer NOT NULL
+	);
+
+	INSERT INTO books(judul, penulis,  penerbit, tahun_terbit, jumlah_halaman, isbn, kategori, bahasa, berat, harga, kondisi, deskripsi, stok) VALUES
+    ('Bahasa Indonesia 1', 'Joko Budiman' ,'Gramedia', '2005', '100', '978-200-8767', 'Buku Pelajaran', 'Indonesia', 100, 200, 'Baru', 'Buku Pelajaran Sekolah Dasar', 5),
+	('Bahasa Inggris 2', 'Bagus Salim', 'Gramedia', '2015', '100', '978-200-9467', 'Buku Pelajaran', 'English', 100, 300, 'Baru', 'Buku Pelajaran Sekolah Pertama', 5),
+	('Bahasa Indonesia 3', 'Hendar Kusuma', 'Erlangga', '2012', '100', '978-200-3767', 'Buku Pelajaran', 'Indonesia', 100, 400, 'Baru', 'Buku Pelajaran Sekolah Menengah', 5);
 	
 	`)
 

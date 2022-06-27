@@ -18,7 +18,7 @@ import useCartStore from './store/cartStore';
 function App() {
   const loc = useLocation()
   const pathName = loc.pathname;
-
+  
   const isLoggedIn = useContext(SessionContext).isLoggedIn
   const dataAccount = useAccountStore().account
   const cartStore = useCartStore()
@@ -73,6 +73,7 @@ function App() {
         {/* USER 
         <Route path='user'>
           {/* daftar buku 
+
           <Route path='buku'>
             <Route index element={ <BookList/> } />
             <Route path=':id' element={ <BookDetail/> } />
