@@ -10,6 +10,9 @@ const useAccountStore = create(persist(devtools(
             state.account = user
         })),
 
+        removeAccount : () => set(produce((state) => {
+            state.account = {}
+        }))
     })
 ), {name:"account"}))
 

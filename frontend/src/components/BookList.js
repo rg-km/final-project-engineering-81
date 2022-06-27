@@ -1,21 +1,13 @@
 import { Button } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom'
 import { getBookLists } from '../api/bookLists';
+import useAccountStore from '../store/accountStore';
+import useCartStore from '../store/cartStore';
 import '../styles/BookList.css'
 
 export default function BookList(){
-    const loc = useLocation()
-    const pathName = loc.pathname
-    const splitPath = pathName.split('/')
-    
-    let link = '/user/buku';
-    let user = '';
-
-    if(splitPath[1] === 'admin'){
-        user = 'admin'
-        link = '/admin/buku'
-    };
+    const dataAccount = useAccountStore().account
 
     const [productActive, setProductActive] = useState('all')
 
@@ -36,7 +28,7 @@ export default function BookList(){
 
     return(
         <div className='container-bookList'>
-            {user ?
+            {dataAccount.role === "admin" ?
                 <>
                     <div className='nav-buku-admin'>
                         <Button 
@@ -80,7 +72,7 @@ export default function BookList(){
             <div className='book-items'>
                 {bookLists.map((item, index)=>{
                     return(
-                        <Link to={`${link}/${item.id}`} key={item.id}>
+                        <Link to={`${dataAccount.role}/buku/${item.id}`} key={item.id}>
                             <div className='card'>
                                 <img src={item.volumeInfo.imageLinks.thumbnail}/>
                                 <div className='detail'>
@@ -88,13 +80,14 @@ export default function BookList(){
                                         <div className='author'>
                                             <h3><b>{item.volumeInfo.authors ? item.volumeInfo.authors[0] : ''}</b></h3> 
                                         </div>
-                                        {user=='admin' ? <h3>{item.saleInfo.isEbook ? 'Tampil' : 'Arsip'}</h3> : ''}
+                                        {dataAccount.role === 'admin' ? <h3>{item.saleInfo.isEbook ? 'Tampil' : 'Arsip'}</h3> : ''}
+
                                     </div>
                                     <div className='title'>
                                         <h2>{item.volumeInfo.title}</h2>
                                     </div>
                                     <h2 className='green'>Rp. 00.000</h2>
-                                    {user ? <h3>300 Terjual</h3> : ''}
+                                    {dataAccount.role === "admin" ? <h3>300 Terjual</h3> : ''}
                                 </div>
                             </div>
                         </Link>
