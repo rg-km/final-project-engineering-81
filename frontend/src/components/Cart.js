@@ -63,7 +63,7 @@ export default function Cart(){
                         </div>
                     </div>
                     <div className='next'>
-                        <Link to={'/user/checkout'}>
+                        <Link to={'/user/checkout'} state={{ totalBrg : totalBrg, total:total }}>
                             <Button className='btn'>Lanjut Ke Pembayaran</Button>
                         </Link>
                     </div>

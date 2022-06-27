@@ -45,7 +45,7 @@ const useCartStore = create(persist(devtools(
         })),
 
         removeCart : () => set(produce((state) => {
-            state.cart = {}
+            state.items = []
         }))
     })
 ), {name:"cart"}))

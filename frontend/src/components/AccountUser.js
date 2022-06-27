@@ -29,8 +29,6 @@ const AccountUser = () => {
 
     const removeAccount = useAccountStore((state) => state.removeAccount)
     const removeCart = useCartStore((state) => state.removeCart)
-    const {account} = useAccountStore()
-    const isLoggedIn = useContext(SessionContext).isLoggedIn
     const setIsLoggedIn = useContext(SessionContext).setIsLoggedIn
     const navigate = useNavigate()
 

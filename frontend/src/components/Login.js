@@ -48,17 +48,6 @@ export default function Login(){
         } else{
             setError('Invalid Email or Password')
         }
-
-        //TRY TO ADD USER DATA WHEN DATABASE ERROR
-        // if(formLogin.email === "user@gmail.com"){
-        //     formLogin.role = "user"
-        // } else if(formLogin.email === "admin@gmail.com"){
-        //     formLogin.role = "admin"
-        // } else if(formLogin.email === "donatur@gmail.com"){
-        //     formLogin.role = "donatur"
-        // }
-        // addDataUser(formLogin)
-        // setIsLoggedIn(true)
     }
 
     useEffect(()=>{
