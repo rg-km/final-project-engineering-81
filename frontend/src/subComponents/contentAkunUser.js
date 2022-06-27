@@ -10,15 +10,17 @@ import {
     InputRightElement,
   } from '@chakra-ui/react'
 import { Formik, Field, Form } from "formik";
+import useAccountStore from '../store/accountStore';
 
 
 const RenderFormAkun = () => {
     const [show, setShow] = React.useState(false)
     const handleClick = () => setShow(!show)
+    const account = useAccountStore().account
 
     return (
         <Formik
-        initialValues={{ username: 'contohAkun123', password: 'contoh' }}
+        // initialValues={{ username: 'contohAkun123', password: 'contoh' }}
         onSubmit={(values, actions) => {
             setTimeout(() => {
             alert(JSON.stringify(values, null, 2))
@@ -39,8 +41,8 @@ const RenderFormAkun = () => {
                 <Field name='username' >
                     {({ field }) => (
                     <FormControl>
-                        <FormLabel htmlFor='username' >Username</FormLabel>
-                        <Input {...field} id='username' placeholder='username' />
+                        <FormLabel htmlFor='username' >Email</FormLabel>
+                        <Input {...field} id='username' placeholder='username' value={account.email?account.email:''}/>
                     </FormControl>
                     )}
                 </Field>
@@ -53,7 +55,9 @@ const RenderFormAkun = () => {
                             <Input {...field} 
                             id='password' pr='4.5rem'
                             type={show ? 'text' : 'password'}
-                            placeholder='Enter password' />
+                            placeholder='Enter password' 
+                            value={account.password?account.password:''}
+                            />
 
                             <InputRightElement width='4.5rem'>
                                 <Button h='1.75rem' size='sm' onClick={handleClick}>

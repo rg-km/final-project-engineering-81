@@ -1,66 +1,14 @@
 import { Button, Input, useDisclosure } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import '../styles/Checkout.css'
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-  } from '@chakra-ui/react'
+import { Modal,  ModalOverlay, ModalContent,  ModalHeader,  ModalFooter,  ModalBody, ModalCloseButton} from '@chakra-ui/react'
+import useCartStore from '../store/cartStore'
+import { useState } from 'react'
 
 export default function Checkout(){
-    function Payment() {
-        const { isOpen, onOpen, onClose } = useDisclosure()
-
-        return (
-            <>
-            <Button onClick={onOpen}>Bayar Pesanan</Button>
-
-            <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent className='modal'>
-                    <ModalHeader className='modal-header'>
-                        <h2>Selesaikan pembayaran sebelum</h2>
-                        <h1>1 Januari 2022, 23.59 WIB</h1>
-                    </ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody pb={6} className='modal-body'>
-                        <div className='transfer'>
-                            <div className='bank-addres'>
-                                <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif'/>
-                                <div>
-                                    <h2><b>BANK NAMA_BANK</b></h2>
-                                    <h3>A/N BukuKita</h3>
-                                </div>
-                            </div>
-                            <Input value={1234567890} isReadOnly />
-                            <h2><b>Nominal Transfer</b></h2>
-                            <Input value={100000} isReadOnly />
-                        </div>
-
-                        <div className='bukti'>
-                            <h2><b>Bukti Pembayaran</b></h2>
-                            <div className='input-img'>
-                                <Input type={'image'} className='img-input' />
-                            </div>
-                            <Button>Upload Bukti Transfer</Button>
-                        </div>
-                    </ModalBody>
-
-                    <ModalFooter>
-                        {/* <Button colorScheme='blue' mr={3}>
-                        Save
-                        </Button> */}
-                        <Button onClick={onClose}>Cancel</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
-            </>
-        )
-    }
+    const cartItems = useCartStore().items
+    const state = useLocation().state
+    // const date = new Date(Date.now() + (3600 * 1000 * 24))
 
     return(
         <div className="co-container">
@@ -78,31 +26,15 @@ export default function Checkout(){
                         Jl. Nama Jalan Penerima, Nama Kota, Nama Provinsi, Kode Pos
                     </h2>
                 </div>
-
                 <div className='co-lists'>
-                    {/* START ITEMS */}
-                    <div className='co-item'>
-                        <div className='item'>
-                            <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif'/>
-                            <div className='item-detail'>
-                                <h3>BukuKita.com</h3>
-                                <h2>Judul Buku</h2>
-                                <h3>1 Barang</h3>
-                                <h2>Rp. 00.000</h2>
-                            </div>
-                        </div>
-                        <div className='co-subTot'>
-                            <h3>Subtotal</h3>
-                            <h1 className='green'>Rp. 00.000</h1>
-                        </div>
-                    </div>
-                    <hr/>
-                    {/* END ITEMS */}
-                    {/* <div className='shipping-method'>
-                        <h1>Metode Pengiriman</h1>
-                        <Button>Pilih Metode Pengiriman</Button>
-                    </div> */}
+                    {cartItems.map((item) => (
+                        <CartItem
+                            key={item.id}
+                            item={item}
+                        />
+                    ))}
                 </div>
+                
             </div>
 
             {/* RIGHT */}
@@ -119,11 +51,11 @@ export default function Checkout(){
                     <div className='details'>
                         <div className='detail'>
                             <h2>Total Pesanan</h2>
-                            <h2>1 Barang</h2>
+                            <h2>{state.totalBrg} Barang</h2>
                         </div>
                         <div className='detail'>
                             <h2>Total Belanja</h2>
-                            <h2><b>Rp. xx.000</b></h2>
+                            <h2><b>Rp. {state.total}</b></h2>
                         </div>
                         <div className='detail'>
                             <h2>Biaya Ongkos Kirim</h2>
@@ -136,10 +68,10 @@ export default function Checkout(){
                         <hr/>
                         <div className='detail'>
                             <h1><b>Total</b></h1>
-                            <h1 className='green'><b>Rp. xx.000</b></h1>
+                            <h1 className='green'><b>Rp. {state.total}</b></h1>
                         </div>
                     </div>
-                    <Payment/>
+                    <Payment total={state.total}/>
                 </div>
             </div>
 
@@ -147,5 +79,88 @@ export default function Checkout(){
             {/* MODAL */}
             
         </div>
+    )
+}
+
+function Payment({total}) {
+    const { isOpen, onOpen, onClose } = useDisclosure()
+
+    const [dateTomorrow, setTomorrow] = useState('')
+
+    const btnBayarOnClick = () => {
+        onOpen()
+        // const date = new Date(Date.now() + (3600 * 1000 * 24))
+        const date = new Date(Date.now() + (3600 * 1000 * 24))
+        const dString = date.toString()
+        setTomorrow(dString)
+        
+    }
+
+    return (
+        <>
+        <Button onClick={btnBayarOnClick}>Bayar Pesanan</Button>
+
+        <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent className='modal'>
+                <ModalHeader className='modal-header'>
+                    <h2>Selesaikan pembayaran sebelum</h2>
+                    <h1>{(dateTomorrow)}</h1>
+                </ModalHeader>
+                <ModalCloseButton />
+                <ModalBody pb={6} className='modal-body'>
+                    <div className='transfer'>
+                        <div className='bank-addres'>
+                            <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif'/>
+                            <div>
+                                <h2><b>BANK NAMA_BANK</b></h2>
+                                <h3>A/N BukuKita</h3>
+                            </div>
+                        </div>
+                        <Input value={1234567890} isReadOnly />
+                        <h2><b>Nominal Transfer</b></h2>
+                        <Input value={total} isReadOnly />
+                    </div>
+
+                    {/* <div className='bukti'>
+                        <h2><b>Bukti Pembayaran</b></h2>
+                        <div className='input-img'>
+                            <Input type={'image'} className='img-input' />
+                        </div>
+                        <Button>Upload Bukti Transfer</Button>
+                    </div> */}
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button onClick={onClose}>Cancel</Button>
+                </ModalFooter>
+            </ModalContent>
+        </Modal>
+        </>
+    )
+}
+
+function CartItem({item}) {
+    return(
+        <>
+        {/* START ITEMS */}
+        <div className='co-item'>
+            <div className='item'>
+                <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif'/>
+                <div className='item-detail'>
+                    <h3>BukuKita.com</h3>
+                    <h2>{item.title}</h2>
+                    <h3>{item.qty} Barang</h3>
+                    <h2>Rp. {item.price}</h2>
+                </div>
+            </div>
+            <div className='co-subTot'>
+                <h3>Subtotal</h3>
+                <h1 className='green'>Rp. {item.qty * item.price}</h1>
+            </div>
+        </div>
+        <hr/>
+        {/* END ITEMS */}
+        </>
     )
 }
