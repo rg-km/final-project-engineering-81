@@ -36,9 +36,10 @@ function App() {
 
       <Routes>
         {/* Login */}
+        
         <Route path='/' element={ <Login/> }/>
 
-        {isLoggedIn && dataAccount.role ?
+        {dataAccount.role ?
         <>
           <Route path={dataAccount.role}>
             {/* daftar buku */}

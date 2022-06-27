@@ -5,7 +5,7 @@ import { Box, Stack, SimpleGrid, Container, Button } from '@chakra-ui/react'
 import contentAkunUser from '../subComponents/contentAkunUser'
 import contentPesananUser from '../subComponents/contentPesananUser'
 import contentDataDiriUser from '../subComponents/contentDataDiriUser'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import useAccountStore from '../store/accountStore'
 import { SessionContext } from '../context/SessionContext'
@@ -30,14 +30,14 @@ const AccountUser = () => {
     const {account} = useAccountStore()
     const isLoggedIn = useContext(SessionContext).isLoggedIn
     const setIsLoggedIn = useContext(SessionContext).setIsLoggedIn
+    const navigate = useNavigate()
 
     const handleLoggedOut = event =>{
         event.preventDefault()
 
         setIsLoggedIn(false)
         removeAccount()
-        // console.log(isLoggedIn);
-        // console.log(account);
+        navigate('/')
     }
 
     return (
