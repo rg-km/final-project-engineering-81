@@ -60,7 +60,7 @@ var _ = Describe("Repository Test", func() {
 		}
 
 		usersRepo = repository.NewUserRepository(db)
-		booksRepo = repository.NewBookRepostitory(db)
+		booksRepo = repository.NewBookRepository(db)
 
 	})
 
@@ -103,8 +103,8 @@ var _ = Describe("Repository Test", func() {
 				res, err := usersRepo.Login("novela@gmail.com", "novela123")
 				Expect(err).ToNot(HaveOccurred())
 				Expect(*res).To(Equal("novela@gmail.com"))
-				Expect(*userRole).To(Equal("admin"))
-				Expect(tokenString).To(Equal("token"))
+				Expect(*res).To(Equal("admin"))
+				Expect(*res).To(Equal("token"))
 			})
 		})
 		When("email is correct but password is incorrect", func() {

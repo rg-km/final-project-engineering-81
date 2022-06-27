@@ -2,8 +2,9 @@ package main
 
 import (
 	"database/sql"
-	"web_bukukita/backend/api"
-	"web_bukukita/backend/repository"
+
+	"github.com/rg-km/final-project-engineering-81/backend/api"
+	"github.com/rg-km/final-project-engineering-81/backend/repository"
 
 	_ "github.com/mattn/go-sqlite3"
 )
