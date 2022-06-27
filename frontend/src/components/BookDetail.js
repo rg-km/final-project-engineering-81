@@ -20,9 +20,16 @@ export default function BookDetail(){
     const price = location.state
 
     const loadBookDetail = async () =>{
-        const bookDetail = await getBooksDetail(id)
-        if(bookDetail.data){
-            setDetailBook(bookDetail.data)
+        const getBookDetail = await getBooksDetail(id)
+        if(getBookDetail.data){
+            setDetailBook(getBookDetail.data)
+            setItem({
+                id : getBookDetail.data.id,
+                title : getBookDetail.data.volumeInfo.title,
+                price : price,
+                qty : qty,
+                img : getBookDetail.data.volumeInfo.imageLinks.thumbnail
+            })
         }
     }
 
@@ -32,22 +39,15 @@ export default function BookDetail(){
         } else{
             setQty(qty+num)
         }
+        setItem({qty:qty})
     }
 
     const keranjangHandle = () => {
-        setItem({
-            id : id,
-            title : detailBook.volumeInfo.title,
-            price : price,
-            qty : qty,
-        })
-        console.log(item);
         addToCart(item)
     }
 
     useEffect(()=>{
         loadBookDetail()
-        // console.log(detailBook);
     }, [])
 
     return(

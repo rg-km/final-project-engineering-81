@@ -1,29 +1,50 @@
 import { Button } from '@chakra-ui/react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import useCartStore from '../store/cartStore'
 import '../styles/Cart.css'
 
 export default function Cart(){
+    const { items, removeItem, changeQty} = useCartStore()
+    const [total, setTotal] = useState(0)
+    const [totalBrg, setTotalBrg] = useState(0)
+
+    // items.map((item)=>setTotalBrg(totalBrg+item.qty))
+
+    // console.log(totalBrg);
+
+    const count = () => {
+        if(items.length > 0){
+            var brg = 0
+            var total = 0 
+            
+            for(var i in items){
+                total = total + (items[i].qty * items[i].price)
+                brg = brg + items[i].qty
+            }
+            setTotal(total)
+            setTotalBrg(brg)
+        }
+    }
+    
+    useEffect(()=>{
+        count()
+    }, [items])
+
     return(
         <div className='cart-container'>
             <div className='cart-left'>
                 <div className='cart-title'>Keranjang</div>
                 <div className='cart-lists'>
-                    {/* START ITEMS */}
-                    <div className='cart-item'>
-                        <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif'/>
-                        <div className='item'>
-                            <h3>BukuKita.com</h3>
-                            <h2>Judul Buku</h2>
-                            <h3>1 Barang</h3>
-                            <h2>Rp. 00.000</h2>
-                        </div>
-                        <div className='cart-tools'>
-                            <i className="bi bi-trash"></i>
-                            <h1><Button>-</Button> <b>1</b> <Button>+</Button></h1>
-                            <h1 className='price'>Rp. 00.000</h1>
-                        </div>
-                    </div>
-                    <hr/>
+                    {/* START ITEMS */}               
+                    {items.map((item) => (
+                        <CartItem
+                            key={item.id}
+                            item={item}
+                            onChange={changeQty}
+                            onRemove = {removeItem}
+                        />
+                    ))}
                     {/* END ITEMS */}
                 </div>
             </div>
@@ -37,8 +58,8 @@ export default function Cart(){
                             <h2 className='total'>Total Biaya Belanja</h2>
                         </div>
                         <div>
-                            <h2>1 Barang</h2>
-                            <h2 className='total-price'>Rp. 00.000</h2>
+                            <h2>{totalBrg} Barang</h2>
+                            <h2 className='total-price'>Rp. {total}</h2>
                         </div>
                     </div>
                     <div className='next'>
@@ -49,5 +70,44 @@ export default function Cart(){
                 </div>
             </div>
         </div>
+    )
+}
+
+function CartItem({item, onChange, onRemove}) {
+    return(
+        <>
+        <div className='cart-item'>
+            <img src={item.img}/>
+            <div className='item'>
+                <h3>BukuKita.com</h3>
+                <h2>{item.title}</h2>
+                <h3>{item.qty} Barang</h3>
+                <h2>Rp. {item.price}</h2>
+            </div>
+            <div className='cart-tools'>
+                <div className='trash'>
+                    <Button 
+                    onClick={() => onRemove(item.id)}>
+                        <i className="bi bi-trash"></i>
+                    </Button>
+                </div>
+                <div className='btn-changeQty'>
+                    <Button
+                    onClick={() => onChange(item.id, item.qty - 1)}
+                    >
+                        -
+                    </Button>
+                    <b>{item.qty}</b>
+                    <Button
+                    onClick={() => onChange(item.id, item.qty + 1)}
+                    >
+                        +
+                    </Button>
+                </div>
+                <h1 className='price'>Rp. {item.qty*item.price}</h1>
+            </div>
+        </div>
+        <hr/>
+        </>
     )
 }
