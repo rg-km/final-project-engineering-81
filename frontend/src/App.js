@@ -18,7 +18,7 @@ import useCartStore from './store/cartStore';
 function App() {
   const loc = useLocation()
   const pathName = loc.pathname;
-
+  
   const isLoggedIn = useContext(SessionContext).isLoggedIn
   const dataAccount = useAccountStore().account
   const cartStore = useCartStore()

@@ -81,6 +81,7 @@ export default function BookList(){
                                             <h3><b>{item.volumeInfo.authors ? item.volumeInfo.authors[0] : ''}</b></h3> 
                                         </div>
                                         {dataAccount.role === 'admin' ? <h3>{item.saleInfo.isEbook ? 'Tampil' : 'Arsip'}</h3> : ''}
+
                                     </div>
                                     <div className='title'>
                                         <h2>{item.volumeInfo.title}</h2>

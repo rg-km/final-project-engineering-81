@@ -161,7 +161,7 @@ func (u *UserRepository) InsertUser(name string, email string, password string, 
 		sqlStatement := `INSERT INTO users (name, email, password, role,loggedin) 
 		VALUES (?, ?, ?, ?, false)`
 
-		_, err := u.db.Exec(sqlStatement, name, role, email, hashPassword)
+		_, err := u.db.Exec(sqlStatement, name, email, hashPassword, role)
 		if err != nil {
 			return nil, err
 		}
