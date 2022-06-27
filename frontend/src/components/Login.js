@@ -32,22 +32,33 @@ export default function Login(){
     const handleLogin = async event =>{
         event.preventDefault();
 
-        const accessLogin = await getLogin(formLogin)
+        // const accessLogin = await getLogin(formLogin)
         
-        if(accessLogin?.status == 200){
-            setIsLoggedIn(true)
-            if(accessLogin.data.email == 'ruben@gmail.com'){
-                accessLogin.data.role = 'admin'
-            } else if(accessLogin.data.email == 'user@gmail.com'){
-                accessLogin.data.role = 'user'
-            } else if(accessLogin.data.email == 'donatur@gmail.com'){
-                accessLogin.data.role = 'donatur'
-            }
-            addDataUser(accessLogin.data)
-            setCookie('token', accessLogin.data.token, { path:'/'})
-        } else{
-            setError('Invalid Email or Password')
+        // if(accessLogin?.status == 200){
+        //     setIsLoggedIn(true)
+        //     if(accessLogin.data.email == 'ruben@gmail.com'){
+        //         accessLogin.data.role = 'admin'
+        //     } else if(accessLogin.data.email == 'user@gmail.com'){
+        //         accessLogin.data.role = 'user'
+        //     } else if(accessLogin.data.email == 'donatur@gmail.com'){
+        //         accessLogin.data.role = 'donatur'
+        //     }
+        //     addDataUser(accessLogin.data)
+        //     setCookie('token', accessLogin.data.token, { path:'/'})
+        // } else{
+        //     setError('Invalid Email or Password')
+        // }
+
+        //TRY TO ADD USER DATA WHEN DATABASE ERROR
+        if(formLogin.email === "user@gmail.com"){
+            formLogin.role = "user"
+        } else if(formLogin.email === "admin@gmail.com"){
+            formLogin.role = "admin"
+        } else if(formLogin.email === "donatur@gmail.com"){
+            formLogin.role = "donatur"
         }
+        addDataUser(formLogin)
+        setIsLoggedIn(true)
     }
 
     useEffect(()=>{

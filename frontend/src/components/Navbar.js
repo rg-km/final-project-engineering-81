@@ -14,6 +14,8 @@ export default function Navbar(){
     const setIsLoggedIn = useContext(SessionContext).setIsLoggedIn
     const addDataUser = useAccountStore((state)=>state.addAccount)
     const {account} = useAccountStore()
+
+    const removeAccount = useAccountStore((state) => state.removeAccount)
     const navigate = useNavigate()
 
     const loc = useLocation()
@@ -34,7 +36,8 @@ export default function Navbar(){
         const logoutAccount = await logout(cookies)
         setIsLoggedIn(false)
         removeCookie('token')
-        addDataUser()
+        removeAccount()
+
     } 
 
     useEffect(()=>{

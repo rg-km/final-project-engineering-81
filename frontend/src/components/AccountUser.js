@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
-import { Box, Stack, SimpleGrid, Container } from '@chakra-ui/react'
+import React, { useContext, useState } from 'react'
+import { Box, Stack, SimpleGrid, Container, Button } from '@chakra-ui/react'
+
 
 import contentAkunUser from '../subComponents/contentAkunUser'
 import contentPesananUser from '../subComponents/contentPesananUser'
 import contentDataDiriUser from '../subComponents/contentDataDiriUser'
 import { Link } from 'react-router-dom'
+
+import useAccountStore from '../store/accountStore'
+import { SessionContext } from '../context/SessionContext'
+
 
 
 const FeatureContent = ({ content, ...rest }) => {
@@ -20,6 +25,20 @@ const FeatureContent = ({ content, ...rest }) => {
 
 const AccountUser = () => {
     const [contentActive, setcontentActive] = useState('Pesanan Saya')
+
+    const removeAccount = useAccountStore((state) => state.removeAccount)
+    const {account} = useAccountStore()
+    const isLoggedIn = useContext(SessionContext).isLoggedIn
+    const setIsLoggedIn = useContext(SessionContext).setIsLoggedIn
+
+    const handleLoggedOut = event =>{
+        event.preventDefault()
+
+        setIsLoggedIn(false)
+        removeAccount()
+        // console.log(isLoggedIn);
+        // console.log(account);
+    }
 
     return (
         <SimpleGrid column={1}>
@@ -74,7 +93,7 @@ const AccountUser = () => {
 
                     
                     
-                    <Link to='/' replace={true}> 
+                    <Button onClick={handleLoggedOut}> 
                         <Box 
                         as='button' 
                         fontSize='xl' 
@@ -84,7 +103,8 @@ const AccountUser = () => {
                         >
                             Keluar
                         </Box>
-                    </Link>
+                    </Button>
+
                 </Box>
 
                 <FeatureContent w='80%'
