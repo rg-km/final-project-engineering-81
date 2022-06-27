@@ -71,7 +71,7 @@ export default function BookList(){
 
             <div className='book-items'>
                 {bookLists.map((item, index)=>{
-                    const price = Math.floor(Math.random() * (250000 - 10000 + 1)) + 10000
+                    const price = Math.floor(Math.random() * (250000 - 10000)) + 10000
                     return(
                         <Link to={`/${dataAccount.role}/buku/${item.id}`} key={item.id} state={price}>
                             <div className='card'>

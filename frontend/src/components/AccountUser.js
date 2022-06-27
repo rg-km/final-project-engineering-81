@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import useAccountStore from '../store/accountStore'
 import { SessionContext } from '../context/SessionContext'
+import useCartStore from '../store/cartStore'
 
 
 
@@ -27,6 +28,7 @@ const AccountUser = () => {
     const [contentActive, setcontentActive] = useState('Pesanan Saya')
 
     const removeAccount = useAccountStore((state) => state.removeAccount)
+    const removeCart = useCartStore((state) => state.removeCart)
     const {account} = useAccountStore()
     const isLoggedIn = useContext(SessionContext).isLoggedIn
     const setIsLoggedIn = useContext(SessionContext).setIsLoggedIn
@@ -37,6 +39,7 @@ const AccountUser = () => {
 
         setIsLoggedIn(false)
         removeAccount()
+        removeCart()
         navigate('/')
     }
 

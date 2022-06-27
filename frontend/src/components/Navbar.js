@@ -7,6 +7,7 @@ import { useCookies } from 'react-cookie';
 import { useContext, useEffect } from 'react'
 import { SessionContext } from '../context/SessionContext'
 import useAccountStore from '../store/accountStore'
+import useCartStore from '../store/cartStore'
 
 
 export default function Navbar(){
@@ -14,6 +15,7 @@ export default function Navbar(){
     const account = useAccountStore().account
 
     const removeAccount = useAccountStore((state) => state.removeAccount)
+    const removeCart = useCartStore((state) => state.removeCart)
 
 
     const [cookies, setCookie, removeCookie] = useCookies(['token'])
@@ -24,6 +26,7 @@ export default function Navbar(){
         setIsLoggedIn(false)
         removeCookie('token')
         removeAccount()
+        removeCart()
         navigate('/', {replace:true})
     } 
 

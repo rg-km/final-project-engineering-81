@@ -21,10 +21,12 @@ const useCartStore = create(persist(devtools(
             } else{
                 state.items.push(itemNew)
             }
+
         })),
 
         removeItem : (itemId) => set(produce((state) => {
-            state.items = state.items.find((item) => item.id !== itemId)
+            state.items = state.items.filter((item) => item.id !== itemId)
+
         })),
 
         changeQty : (itemId, qty) => set(produce((state) => {
@@ -32,11 +34,18 @@ const useCartStore = create(persist(devtools(
 
             itemChange.qty = qty
 
-            if(itemChange.qty == 0){
-                itemChange.qty = 1
+            if(itemChange){
+                state.items = state.items.filter((item) => item.id !== itemId)
+                if(itemChange.qty == 0){
+                    itemChange.qty = 1
+                }
+                state.items.push(itemChange)
             }
 
-            state.items.push(itemChange)
+        })),
+
+        removeCart : () => set(produce((state) => {
+            state.cart = {}
         }))
     })
 ), {name:"cart"}))
