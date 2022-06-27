@@ -1,28 +1,34 @@
 import { Button } from '@chakra-ui/react'
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import { getBooksDetail } from '../api/bookLists'
+import useAccountStore from '../store/accountStore'
+import useCartStore from '../store/cartStore'
 import '../styles/BookDetail.css'
 
 
 export default function BookDetail(){
     const [ detailBook, setDetailBook ] = useState()
     const { id } = useParams()
+    const dataAccount = useAccountStore().account
+
+    const addToCart = useCartStore((state) => state.addCart)
+    const location = useLocation()
+    const price = location.state
 
     const loadBookDetail = async () =>{
         const bookDetail = await getBooksDetail(id)
         if(bookDetail.data){
             setDetailBook(bookDetail.data)
-            console.log(bookDetail);
+            // console.log(bookDetail);
         }
     }
 
     useEffect(()=>{
         loadBookDetail()
-        console.log(detailBook);
+        // console.log(detailBook);
     }, [])
 
-    // console.log(detailBook.volumeInfo.imageLinks.thumbnail);
     return(
         <div className='container-bookDetail'>
             {
@@ -38,7 +44,7 @@ export default function BookDetail(){
                         <h1 className='title'>{detailBook.volumeInfo.title}</h1>
                         <p className='writer'>{detailBook.volumeInfo.authors}</p>
                         <div className='price'>
-                            <h1>Rp. 00.000</h1> Stock : 100 &emsp; &emsp; Terjual:10
+                            <h1>Rp. {price}</h1> Stock : 100 &emsp; &emsp; Terjual:10
                         </div>
 
                         <hr/>
@@ -59,7 +65,7 @@ export default function BookDetail(){
                                     <h4>Jumlah Halaman</h4>
                                     <h3>{detailBook.volumeInfo.printedPageCount}</h3>
                                     <h4>ISBN</h4>
-                                    <h3>{detailBook.volumeInfo.industryIdentifiers[0].identifier}</h3>
+                                    <h3>{detailBook.volumeInfo.industryIdentifiers?.identifier}</h3>
                                 </div>
                                 <div>
                                     <h4>Tahun Terbit</h4>
@@ -69,7 +75,7 @@ export default function BookDetail(){
                                     <h4>Bahasa</h4>
                                     <h3>{detailBook.volumeInfo.language}</h3>
                                     <h4>Kategori Buku</h4>
-                                    <h3>{detailBook.volumeInfo.categories[0]}</h3>
+                                    <h3>{detailBook.volumeInfo.categories}</h3>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +99,12 @@ export default function BookDetail(){
                         <div className='buy-card'>
                             <h3 className='grey'>Atur jumlah pembelian</h3>
                             <h3>Jumlah Barang</h3>
-                            <h3><Button>-</Button> <b>1</b> <Button>+</Button></h3>
+                            <div className='btn-changeQty'>
+                                <Button>-</Button>
+                                <h3><b>1</b></h3>
+                                <Button>+</Button>
+                            </div>
+                            {/* <h3><Button>-</Button> <b>1</b> <Button>+</Button></h3> */}
                             <div>
                                 <div className='subtotal'>
                                     <div className='grey'>Subtotal</div>
@@ -101,10 +112,10 @@ export default function BookDetail(){
                                 </div>
 
                                 <div className='buy-btn'>
-                                    <Link to={'/keranjang'}>
+                                    <Link to={`/${dataAccount.role}/keranjang`}>
                                         <Button className='keranjang'>Keranjang</Button>
                                     </Link>
-                                    <Link to={'/checkout'}>
+                                    <Link to={`/${dataAccount.role}/checkout`}>
                                         <Button className='beli'>Beli Sekarang</Button>
                                     </Link>
                                 </div>

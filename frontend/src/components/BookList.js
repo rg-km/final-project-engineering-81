@@ -71,8 +71,9 @@ export default function BookList(){
 
             <div className='book-items'>
                 {bookLists.map((item, index)=>{
+                    const price = Math.floor(Math.random() * (250000 - 10000 + 1)) + 10000
                     return(
-                        <Link to={`${dataAccount.role}/buku/${item.id}`} key={item.id}>
+                        <Link to={`/${dataAccount.role}/buku/${item.id}`} key={item.id} state={price}>
                             <div className='card'>
                                 <img src={item.volumeInfo.imageLinks.thumbnail}/>
                                 <div className='detail'>
@@ -86,7 +87,7 @@ export default function BookList(){
                                     <div className='title'>
                                         <h2>{item.volumeInfo.title}</h2>
                                     </div>
-                                    <h2 className='green'>Rp. 00.000</h2>
+                                    <h2 className='green'>Rp. {price}</h2>
                                     {dataAccount.role === "admin" ? <h3>300 Terjual</h3> : ''}
                                 </div>
                             </div>

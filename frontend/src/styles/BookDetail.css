@@ -123,6 +123,11 @@
     justify-content: space-between;
 }
 
+.buy-card .btn-changeQty{
+    display: flex;
+    justify-content: space-around;
+}
+
 .buy-card button{
     background-color: #112B3C;
     color: white;
@@ -136,9 +141,14 @@
     margin: 0px 10px 0px 10px;
 }
 
+.buy-btn{
+    display: flex;
+    justify-content: space-between;
+}
+
 .buy-btn button{
-    width: 130px;
-    font-size: 18px;
+    font-size: 14px;
+    width: fit-content;
 }
 
 .buy-btn .keranjang{

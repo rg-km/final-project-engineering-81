@@ -10,45 +10,26 @@ import useAccountStore from '../store/accountStore'
 
 
 export default function Navbar(){
-    const isLoggedIn = useContext(SessionContext).isLoggedIn
     const setIsLoggedIn = useContext(SessionContext).setIsLoggedIn
-    const addDataUser = useAccountStore((state)=>state.addAccount)
-    const {account} = useAccountStore()
+    const account = useAccountStore().account
 
     const removeAccount = useAccountStore((state) => state.removeAccount)
-    const navigate = useNavigate()
 
-    const loc = useLocation()
-    const pathName = loc.pathname
-    const splitPath = pathName.split('/')
-    
-    let link = '/user/buku';
-    let user = '';
-
-    if(splitPath[1] === 'admin'){
-        user = 'admin'
-        link = '/admin/buku'
-    };
 
     const [cookies, setCookie, removeCookie] = useCookies(['token'])
+    const navigate = useNavigate()
 
     const handleLogedOut = async() => {
         const logoutAccount = await logout(cookies)
         setIsLoggedIn(false)
         removeCookie('token')
         removeAccount()
-
+        navigate('/', {replace:true})
     } 
-
-    useEffect(()=>{
-        if (!isLoggedIn){
-            navigate('/')
-        }
-    },[isLoggedIn])
 
     return(
         <div className="navbar-container">
-            <Link to={link}>
+            <Link to={`${account.role}/buku`}>
                 <div className='title'>
                     <img src={logo} alt="logo"/>
                     <p>BukuKita</p>
@@ -56,10 +37,10 @@ export default function Navbar(){
             </Link>
 
             <div className='tools'>
-                {user === 'admin' 
+                {account.role === 'admin' 
                     ?
                     <>
-                        <Link to={'/admin/pesanan'}>
+                        <Link to={`/${account.role}/pesanan`}>
                             <i className="bi bi-card-list"></i>
                         </Link>
                         <Button onClick={handleLogedOut}>
@@ -68,11 +49,11 @@ export default function Navbar(){
                     </>
                     :
                     <>
-                        <Link to={'/user/keranjang'}>
+                        <Link to={`/${account.role}/keranjang`}>
                             <i className="bi bi-cart3"></i>
                         </Link>
                         
-                        <Link to={'/user/akun'}>
+                        <Link to={`/${account.role}/akun`}>
                             <img src='https://dinkes.dairikab.go.id/wp-content/uploads/sites/12/2022/03/default-img.gif' alt='user'/>
                         </Link>
                     </>
