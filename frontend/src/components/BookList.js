@@ -1,7 +1,7 @@
 import { Button } from '@chakra-ui/react';
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom'
-import { getBookLists } from '../api/bookLists';
+import { getBookLists, testgetBookLists } from '../api/bookLists';
 import useAccountStore from '../store/accountStore';
 import useCartStore from '../store/cartStore';
 import '../styles/BookList.css'

@@ -24,3 +24,13 @@ export const getBooksDetail = async(id) =>{
         console.log(error);
     }
 }
+
+
+// export const testgetBookLists = async () => {
+//     try {
+//         const lists = await axios.get("http://localhost:8080/api/books")
+//         return lists
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }

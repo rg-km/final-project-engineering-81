@@ -13,6 +13,9 @@ export default function BookDetail(){
     const dataAccount = useAccountStore().account
 
     const addToCart = useCartStore((state) => state.addCart)
+    const [item, setItem] = useState()
+    const [qty, setQty] = useState(1)
+
     const location = useLocation()
     const price = location.state
 
@@ -20,8 +23,26 @@ export default function BookDetail(){
         const bookDetail = await getBooksDetail(id)
         if(bookDetail.data){
             setDetailBook(bookDetail.data)
-            // console.log(bookDetail);
         }
+    }
+
+    const changeQty = (num) => {
+        if(qty === 1 && num < 0){
+            setQty(1)
+        } else{
+            setQty(qty+num)
+        }
+    }
+
+    const keranjangHandle = () => {
+        setItem({
+            id : id,
+            title : detailBook.volumeInfo.title,
+            price : price,
+            qty : qty,
+        })
+        console.log(item);
+        addToCart(item)
     }
 
     useEffect(()=>{
@@ -44,7 +65,8 @@ export default function BookDetail(){
                         <h1 className='title'>{detailBook.volumeInfo.title}</h1>
                         <p className='writer'>{detailBook.volumeInfo.authors}</p>
                         <div className='price'>
-                            <h1>Rp. {price}</h1> Stock : 100 &emsp; &emsp; Terjual:10
+                            <h1>Rp. {price}</h1> 
+                            {/* Stock : 100 &emsp; &emsp; Terjual:10 */}
                         </div>
 
                         <hr/>
@@ -100,21 +122,25 @@ export default function BookDetail(){
                             <h3 className='grey'>Atur jumlah pembelian</h3>
                             <h3>Jumlah Barang</h3>
                             <div className='btn-changeQty'>
-                                <Button>-</Button>
-                                <h3><b>1</b></h3>
-                                <Button>+</Button>
+                                <Button onClick={() => changeQty(-1)}>-</Button>
+                                <h3><b>{qty}</b></h3>
+                                <Button onClick={() => changeQty(1)}>+</Button>
                             </div>
-                            {/* <h3><Button>-</Button> <b>1</b> <Button>+</Button></h3> */}
+                            
                             <div>
                                 <div className='subtotal'>
                                     <div className='grey'>Subtotal</div>
-                                    <div>Rp. 00.000</div>
+                                    <div>Rp. {price * qty}</div>
                                 </div>
 
                                 <div className='buy-btn'>
-                                    <Link to={`/${dataAccount.role}/keranjang`}>
-                                        <Button className='keranjang'>Keranjang</Button>
-                                    </Link>
+                                    <Button 
+                                    className='keranjang'
+                                    onClick={keranjangHandle}
+                                    >
+                                        Keranjang
+                                    </Button>
+
                                     <Link to={`/${dataAccount.role}/checkout`}>
                                         <Button className='beli'>Beli Sekarang</Button>
                                     </Link>

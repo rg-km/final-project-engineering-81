@@ -126,6 +126,7 @@
 .buy-card .btn-changeQty{
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 .buy-card button{
@@ -148,7 +149,7 @@
 
 .buy-btn button{
     font-size: 14px;
-    width: fit-content;
+    width: 100%;
 }
 
 .buy-btn .keranjang{
