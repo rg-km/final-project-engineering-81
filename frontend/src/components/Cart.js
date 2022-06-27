@@ -18,7 +18,7 @@ export default function Cart(){
                             <h2>Rp. 00.000</h2>
                         </div>
                         <div className='cart-tools'>
-                            <i class="bi bi-trash"></i>
+                            <i className="bi bi-trash"></i>
                             <h1><Button>-</Button> <b>1</b> <Button>+</Button></h1>
                             <h1 className='price'>Rp. 00.000</h1>
                         </div>
@@ -42,7 +42,7 @@ export default function Cart(){
                         </div>
                     </div>
                     <div className='next'>
-                        <Link to={'/checkout'}>
+                        <Link to={'/user/checkout'}>
                             <Button className='btn'>Lanjut Ke Pembayaran</Button>
                         </Link>
                     </div>
