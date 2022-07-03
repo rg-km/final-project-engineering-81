@@ -117,6 +117,8 @@ export default function BookDetail(){
                         </div>
                     </div>
 
+                    {dataAccount.role === "user" ?
+                    
                     <div className='detail-right'>
                         <div className='buy-card'>
                             <h3 className='grey'>Atur jumlah pembelian</h3>
@@ -148,6 +150,8 @@ export default function BookDetail(){
                             </div>
                         </div>
                     </div>
+                    :
+                    '' }
                 </>
                 :
                 ''
